@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using NUnit.Framework;
@@ -18,11 +16,8 @@ namespace LeetCodeJune.Task5
             var indexPicker = new RandomIndexPicker(input);
             var result = new List<int>();
             var numberOfSamples = 10_00000;
-            var deviation = (int) Math.Sqrt(numberOfSamples)*2;
-            for (var _ = 0; _ < numberOfSamples; _++)
-            {
-                result.Add(indexPicker.PickIndex());
-            }
+            var deviation = (int) Math.Sqrt(numberOfSamples) * 2;
+            for (var _ = 0; _ < numberOfSamples; _++) result.Add(indexPicker.PickIndex());
 
             var part = numberOfSamples / 5;
             using (var _ = new AssertionScope())

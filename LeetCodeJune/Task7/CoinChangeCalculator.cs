@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace LeetCodeJune.Task7
+﻿namespace LeetCodeJune.Task7
 {
     public static class CoinChangeCalculator
     {
@@ -9,12 +7,8 @@ namespace LeetCodeJune.Task7
             var dp = new int[amount + 1];
             dp[0] = 1;
             foreach (var coin in coins)
-            {
                 for (var i = coin; i <= amount; i++)
-                {
                     dp[i] += dp[i - coin];
-                }
-            }
 
             return dp[amount];
         }

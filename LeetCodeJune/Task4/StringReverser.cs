@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace LeetCodeJune.Task4
+﻿namespace LeetCodeJune.Task4
 {
     public static class StringReverser
     {

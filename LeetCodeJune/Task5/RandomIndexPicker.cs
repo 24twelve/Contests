@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeetCodeJune.Task5
 {
     public class RandomIndexPicker
     {
+        private readonly (int Index, double Weigh)[] normalizedWeighs;
+
+
+        private readonly Random random;
+
         public RandomIndexPicker(int[] w)
         {
             random = new Random();
@@ -29,16 +32,10 @@ namespace LeetCodeJune.Task5
         {
             var randomValue = random.NextDouble();
             foreach (var (index, weigh) in normalizedWeighs)
-            {
                 if (randomValue <= weigh)
                     return index;
-            }
 
             return normalizedWeighs.Last().Index;
         }
-
-
-        private readonly Random random;
-        private readonly (int Index, double Weigh)[] normalizedWeighs;
     }
 }

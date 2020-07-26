@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LeetCodeJune.Task2
+﻿namespace LeetCodeJune.Task2
 {
     public class ListNode
     {
-        public int val;
         public ListNode next;
+        public int val;
 
         public ListNode(int x)
         {
