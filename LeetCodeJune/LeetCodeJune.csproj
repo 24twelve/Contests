@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValue.cs" />
+    <Compile Include="FindPoisonedDuration\FindPoisonedDuration.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="LongestUnivaluePath\LongestUnivaluePath.cs" />
     <Compile Include="BinaryTreeInvertor\BinaryTreeInvertor.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="Task3\TwoCityScheduler.cs" />
     <Compile Include="Task2\DeleteNodeTests.cs" />
     <Compile Include="BinaryTreeInvertor\InvertBinaryTreeTests.cs" />
-    <Compile Include="BinaryTreeInvertor\TreeNode.cs" />
     <Compile Include="Task3\TwoCitySchedulerTests.cs" />
     <Compile Include="Task4\ReverseStringTests.cs" />
     <Compile Include="Task4\StringReverser.cs" />
