@@ -16,6 +16,7 @@ namespace LeetCodeJune.Common
         public static TreeNode Copy([NotNull] TreeNode root)
         {
             var result = new TreeNode(root.val);
+            result.next = root.next;
             if (root.left != null)
                 result.left = Copy(root.left);
             if (root.right != null)

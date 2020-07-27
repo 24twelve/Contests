@@ -42,6 +42,12 @@ namespace LeetCodeJune.Common
             copyTriplet.Should().BeEquivalentTo(triplet);
             copyTriplet.Should().NotBeSameAs(triplet);
 
+            var tripletWithNextNodes = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+            tripletWithNextNodes.left.next = tripletWithNextNodes.right;
+            var copyTripletWithNextNodes = TreeNodeHelpers.Copy(tripletWithNextNodes);
+            copyTripletWithNextNodes.Should().BeEquivalentTo(tripletWithNextNodes);
+            copyTripletWithNextNodes.Should().NotBeSameAs(tripletWithNextNodes);
+
 
             var singleNode = new TreeNode(1);
             var copySingleNode = TreeNodeHelpers.Copy(singleNode);

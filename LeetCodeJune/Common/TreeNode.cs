@@ -19,9 +19,10 @@ namespace LeetCodeJune.Common
             this.right = right;
         }
 
-        //todo: several digit numbers :)
+        //todo: several digit numbers and other next nodes
+        //todo: make it several class
         [NotNull]
-        public string Print()
+        public string Print(bool printNextNodes = false)
         {
             var copy = TreeNodeHelpers.Copy(this);
             TreeNodeHelpers.PopulateWithFakeNodes(copy, -1);
@@ -29,23 +30,24 @@ namespace LeetCodeJune.Common
             if (copy.IsLeaf())
                 return val.ToString();
 
-            return string.Join("\r\n", PrintRecursively(copy));
+            return string.Join("\r\n", PrintRecursively(copy, printNextNodes));
         }
 
 
-        private static string[] PrintRecursively(TreeNode node)
+        private static string[] PrintRecursively(TreeNode node, bool printNextNodes)
         {
             if (node.IsTriplet())
-                return PrintTriplet(node);
-            return ConnectToRoot(node.val, PrintRecursively(node.left), PrintRecursively(node.right));
+                return PrintTriplet(node, printNextNodes);
+            return ConnectToRoot(node.val, PrintRecursively(node.left, printNextNodes),
+                PrintRecursively(node.right, printNextNodes));
         }
 
-        private static string[] PrintTriplet(TreeNode node)
+        private static string[] PrintTriplet(TreeNode node, bool printNextNodes)
         {
             return new[]
             {
-                $"  {PrintNode(node)}  ",
-                $"{PrintNode(node.left)}   {PrintNode(node.right)}"
+                $"  {PrintNode(node, printNextNodes)}  ",
+                $"{PrintNode(node.left, printNextNodes)}   {PrintNode(node.right, printNextNodes)}"
             };
         }
 
@@ -79,9 +81,13 @@ namespace LeetCodeJune.Common
         }
 
         [NotNull]
-        private static string PrintNode([CanBeNull] TreeNode node)
+        private static string PrintNode([CanBeNull] TreeNode node, bool printNextNodes)
         {
-            return node == null || node.val == -1 ? " " : $"{node.val}";
+            if (node == null || node.val == -1) return " ";
+            var result = $"{node.val}";
+            if (printNextNodes)
+                result = $"{node.val}->{node.next?.val}";
+            return result;
         }
 
         [NotNull]

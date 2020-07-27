@@ -56,6 +56,25 @@ namespace LeetCodeJune.Common
         }
 
         [Test]
+        public void TestPrintNextNodes()
+        {
+            var root = new TreeNode(1);
+            root.right = new TreeNode(3, left: new TreeNode(6), right: new TreeNode(7));
+            root.left = new TreeNode(2, left: new TreeNode(4), right: new TreeNode(4));
+            root.left.next = root.right;
+            root.left.left.next = root.left.right;
+            root.left.right.next = root.right.left;
+            root.right.left.next = root.right.right;
+
+            var expected = @"
+        1       
+  2->3     3->  
+4->4   4->6 6->7   7->";
+
+            AssertPrintNextNodes(root, expected);
+        }
+
+        [Test]
         public void PrintBigTreeWithHoles()
         {
             var expected = @"
@@ -78,6 +97,13 @@ namespace LeetCodeJune.Common
         private void Assert(TreeNode root, string expected)
         {
             var result = $"\r\n{root.Print()}";
+            Console.WriteLine($"Result:\r\n{result}");
+            result.Should().Be(expected);
+        }
+
+        private void AssertPrintNextNodes(TreeNode root, string expected)
+        {
+            var result = $"\r\n{root.Print(true)}";
             Console.WriteLine($"Result:\r\n{result}");
             result.Should().Be(expected);
         }
