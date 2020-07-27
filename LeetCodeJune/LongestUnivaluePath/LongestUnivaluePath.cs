@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using JetBrains.Annotations;
 using NUnit.Framework;
 
 namespace LeetCodeJune.LongestUnivaluePath
@@ -36,7 +35,7 @@ namespace LeetCodeJune.LongestUnivaluePath
             if (root.right != null && root.right.val == root.val)
             {
                 var someInt = 0;
-                FindLongestPathDown(root.right,ref rightPath,ref someInt);
+                FindLongestPathDown(root.right, ref rightPath, ref someInt);
                 rightPath++;
             }
 
@@ -58,7 +57,9 @@ namespace LeetCodeJune.LongestUnivaluePath
                 var newCurrentPath = currentPath;
                 newCurrentPath++;
                 FindLongestPathDown(node.right, ref currentLongestPath, ref newCurrentPath);
-            };
+            }
+
+            ;
 
             if (node.left != null && node.left.val == node.val)
             {
@@ -66,7 +67,6 @@ namespace LeetCodeJune.LongestUnivaluePath
                 newCurrentPath++;
                 FindLongestPathDown(node.left, ref currentLongestPath, ref newCurrentPath);
             }
-
         }
     }
 
@@ -81,7 +81,7 @@ namespace LeetCodeJune.LongestUnivaluePath
         [Test]
         public void TestTwoPaths()
         {
-            var root = new TreeNode(1, left: new TreeNode(1), right: new TreeNode(1));
+            var root = new TreeNode(1, new TreeNode(1), new TreeNode(1));
             Console.WriteLine(root.ToString());
             LongestUnivaluePath.Find(root).Should().Be(2);
         }
@@ -89,7 +89,7 @@ namespace LeetCodeJune.LongestUnivaluePath
         [Test]
         public void TestTwoPaths_TwoLevels()
         {
-            var root = new TreeNode(1, left: new TreeNode(1), right: new TreeNode(1));
+            var root = new TreeNode(1, new TreeNode(1), new TreeNode(1));
             root.left.left = new TreeNode(1);
             root.right.right = new TreeNode(1);
             Console.WriteLine(root.ToString());
@@ -231,35 +231,6 @@ namespace LeetCodeJune.LongestUnivaluePath
             Console.WriteLine(root.ToString());
 
             LongestUnivaluePath.Find(root).Should().Be(4);
-        }
-    }
-
-
-    public class TreeNode
-    {
-        public TreeNode left;
-        public TreeNode right;
-        public int val;
-
-        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
-        {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-
-        //todo: do good
-        public override string ToString()
-        {
-            var result = new List<string>
-            {
-                $"      {val}      ",
-                $"    {left?.val}  {right?.val}",
-                $"  {left?.left?.val}  {left?.right?.val}  {right?.left?.val}  {right?.right?.val}",
-                $"{left?.left?.left?.val}  {left?.left?.right?.val}  {left?.right?.left?.val}  {left?.right?.right?.val}  {right?.left?.left?.val}  {right?.left?.right?.val}  {right?.right?.left?.val}  {right?.right?.right?.val}"
-            };
-
-            return string.Join("\r\n", result);
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCodeJune.SameTree
@@ -12,7 +7,7 @@ namespace LeetCodeJune.SameTree
     {
         public static bool IsSame(TreeNode first, TreeNode second)
         {
-            if (first == second) 
+            if (first == second)
                 return true;
             if (first == null)
                 return false;
@@ -54,10 +49,10 @@ namespace LeetCodeJune.SameTree
         [Test]
         public void TestThreeNodes()
         {
-            var node1 = new TreeNode(1,left: new TreeNode(2), right: new TreeNode(3));
-            var node2 = new TreeNode(1,left: new TreeNode(2), right: new TreeNode(3));
-            var node3 = new TreeNode(1,left: new TreeNode(999), right: new TreeNode(3));
-            var node4 = new TreeNode(1,left: new TreeNode(2), right: new TreeNode(999));
+            var node1 = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+            var node2 = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+            var node3 = new TreeNode(1, new TreeNode(999), new TreeNode(3));
+            var node4 = new TreeNode(1, new TreeNode(2), new TreeNode(999));
             IsSameTree.IsSame(node1, node2).Should().BeTrue();
             IsSameTree.IsSame(node1, node3).Should().BeFalse();
             IsSameTree.IsSame(node1, node4).Should().BeFalse();
@@ -66,23 +61,22 @@ namespace LeetCodeJune.SameTree
         [Test]
         public void TestOnlyRight()
         {
-            var node1 = new TreeNode(1,right: new TreeNode(3, right: new TreeNode(4)));
-            var node2 = new TreeNode(1,right: new TreeNode(3, right: new TreeNode(4)));
-            var node3 = new TreeNode(1,right: new TreeNode(999, right: new TreeNode(4)));
-            var node4 = new TreeNode(1,right: new TreeNode(3, right: new TreeNode(999)));
+            var node1 = new TreeNode(1, right: new TreeNode(3, right: new TreeNode(4)));
+            var node2 = new TreeNode(1, right: new TreeNode(3, right: new TreeNode(4)));
+            var node3 = new TreeNode(1, right: new TreeNode(999, right: new TreeNode(4)));
+            var node4 = new TreeNode(1, right: new TreeNode(3, right: new TreeNode(999)));
             IsSameTree.IsSame(node1, node2).Should().BeTrue();
             IsSameTree.IsSame(node1, node3).Should().BeFalse();
             IsSameTree.IsSame(node1, node4).Should().BeFalse();
+        }
 
-        } 
-        
         [Test]
         public void TestOnlyLeft()
         {
-            var node1 = new TreeNode(1,left: new TreeNode(3, left: new TreeNode(4)));
-            var node2 = new TreeNode(1,left: new TreeNode(3, left: new TreeNode(4)));
-            var node3 = new TreeNode(1,left: new TreeNode(999, left: new TreeNode(4)));
-            var node4 = new TreeNode(1,left: new TreeNode(3, left: new TreeNode(999)));
+            var node1 = new TreeNode(1, new TreeNode(3, new TreeNode(4)));
+            var node2 = new TreeNode(1, new TreeNode(3, new TreeNode(4)));
+            var node3 = new TreeNode(1, new TreeNode(999, new TreeNode(4)));
+            var node4 = new TreeNode(1, new TreeNode(3, new TreeNode(999)));
             IsSameTree.IsSame(node1, node2).Should().BeTrue();
             IsSameTree.IsSame(node1, node3).Should().BeFalse();
             IsSameTree.IsSame(node1, node4).Should().BeFalse();
@@ -91,25 +85,9 @@ namespace LeetCodeJune.SameTree
         [Test]
         public void TestStructuralInequal()
         {
-            var node1 = new TreeNode(1,left: new TreeNode(3, left: new TreeNode(4)));
+            var node1 = new TreeNode(1, new TreeNode(3, new TreeNode(4)));
             var node2 = new TreeNode(1, right: new TreeNode(3, right: new TreeNode(4)));
             IsSameTree.IsSame(node1, node2).Should().BeFalse();
-        }
-
-    }
-
-
-    public class TreeNode
-    {
-        public int val;
-        public TreeNode left;
-        public TreeNode right;
-
-        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
-        {
-            this.val = val;
-            this.left = left;
-            this.right = right;
         }
     }
 }

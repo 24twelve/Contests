@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValue.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="LongestUnivaluePath\LongestUnivaluePath.cs" />
     <Compile Include="BinaryTreeInvertor\BinaryTreeInvertor.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Task7\CoinChangeCalculator.cs" />
     <Compile Include="Task7\CoinChangeCalculatorTests.cs" />
     <Compile Include="Task8\PowerOfTwo.cs" />
+    <Compile Include="TreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
