@@ -1,9 +1,8 @@
 ﻿using System;
 using FluentAssertions;
-using LeetCodeJune.Task2;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tests
+namespace LeetCodeJune.Task2
 {
     public class DeleteNodeTests
     {

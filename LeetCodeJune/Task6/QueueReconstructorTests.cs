@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using LeetCodeJune.Common;
 using NUnit.Framework;
 
 namespace LeetCodeJune.Task6

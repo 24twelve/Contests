@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace LeetCodeJune
+namespace LeetCodeJune.Common
 {
-    public static class Helpers
+    public static class SerializeHelpers
     {
         public static string ToPrettyJson<T>(this T obj, Formatting formatting = Formatting.None)
         {

@@ -54,13 +54,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\PrintTreeNodeTests.cs" />
+    <Compile Include="Common\TreeNodeHelpers.cs" />
+    <Compile Include="Common\TreeNodeHelpersTests.cs" />
     <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValue.cs" />
+    <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValueTests.cs" />
     <Compile Include="FindPoisonedDuration\FindPoisonedDuration.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Common\SerializeHelpers.cs" />
+    <Compile Include="FindPoisonedDuration\FindPoisonedDurationTests.cs" />
     <Compile Include="LongestUnivaluePath\LongestUnivaluePath.cs" />
     <Compile Include="BinaryTreeInvertor\BinaryTreeInvertor.cs" />
+    <Compile Include="LongestUnivaluePath\LongestUnivaluePathTests.cs" />
+    <Compile Include="PopulateNextRightPointers\PopulateNextRightPointer.cs" />
+    <Compile Include="PopulateNextRightPointers\PopulateNextRightPointerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SameTree\SameTree.cs" />
+    <Compile Include="SameTree\IsSameTree.cs" />
+    <Compile Include="SameTree\SameTreeTests.cs" />
     <Compile Include="Task2\ListNode.cs" />
     <Compile Include="Task2\ListNodeDeleter.cs" />
     <Compile Include="Task3\TwoCityScheduler.cs" />
@@ -76,7 +85,8 @@
     <Compile Include="Task7\CoinChangeCalculator.cs" />
     <Compile Include="Task7\CoinChangeCalculatorTests.cs" />
     <Compile Include="Task8\PowerOfTwo.cs" />
-    <Compile Include="TreeNode.cs" />
+    <Compile Include="Common\TreeNode.cs" />
+    <Compile Include="Task8\PowerOfTwoTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

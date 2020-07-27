@@ -1,9 +1,9 @@
 ﻿using System;
 using FluentAssertions;
-using LeetCodeJune.Task1;
+using LeetCodeJune.Common;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tests
+namespace LeetCodeJune.BinaryTreeInvertor
 {
     public class InvertBinaryTreeTests
     {

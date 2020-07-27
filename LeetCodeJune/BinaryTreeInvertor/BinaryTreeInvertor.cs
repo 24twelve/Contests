@@ -1,4 +1,6 @@
-﻿namespace LeetCodeJune.Task1
+﻿using LeetCodeJune.Common;
+
+namespace LeetCodeJune.BinaryTreeInvertor
 {
     public static class BinaryTreeInvertor
     {
