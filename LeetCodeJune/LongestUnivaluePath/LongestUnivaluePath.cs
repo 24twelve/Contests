@@ -9,7 +9,8 @@ namespace LeetCodeJune.LongestUnivaluePath
     {
         public static int Find(TreeNode root)
         {
-            if (root == null) return 0;
+            if (root == null)
+                return 0;
 
             var paths = new List<int>();
             var stack = new Stack<TreeNode>();

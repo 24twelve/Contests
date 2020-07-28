@@ -17,7 +17,8 @@ namespace LeetCodeJune.Task5
             var result = new List<int>();
             var numberOfSamples = 10_00000;
             var deviation = (int) Math.Sqrt(numberOfSamples) * 2;
-            for (var _ = 0; _ < numberOfSamples; _++) result.Add(indexPicker.PickIndex());
+            for (var _ = 0; _ < numberOfSamples; _++)
+                result.Add(indexPicker.PickIndex());
 
             var part = numberOfSamples / 5;
             using (var _ = new AssertionScope())

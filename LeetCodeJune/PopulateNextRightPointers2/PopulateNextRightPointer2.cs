@@ -98,7 +98,7 @@ namespace LeetCodeJune.PopulateNextRightPointers2
         [Test]
         public void TestHangingLevel3()
         {
-            var root = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+            var root = new TreeNode(1, left: new TreeNode(2), right: new TreeNode(3));
             root.left.left = new TreeNode(4);
             root.right.right = new TreeNode(7);
             var expectedRoot = root.Copy();

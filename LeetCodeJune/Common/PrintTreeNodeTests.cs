@@ -59,8 +59,8 @@ namespace LeetCodeJune.Common
         public void TestPrintNextNodes()
         {
             var root = new TreeNode(1);
-            root.right = new TreeNode(3, left: new TreeNode(6), right: new TreeNode(7));
-            root.left = new TreeNode(2, left: new TreeNode(4), right: new TreeNode(4));
+            root.right = new TreeNode(3, new TreeNode(6), new TreeNode(7));
+            root.left = new TreeNode(2, new TreeNode(4), new TreeNode(4));
             root.left.next = root.right;
             root.left.left.next = root.left.right;
             root.left.right.next = root.right.left;

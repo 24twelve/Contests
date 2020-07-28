@@ -11,7 +11,8 @@ namespace LeetCodeJune.Task6
             Array.Sort(people, new ArrayComparer());
 
             var list = new List<int[]>();
-            foreach (var item in people) list.Insert(item[1], item);
+            foreach (var item in people)
+                list.Insert(item[1], item);
 
             return list.ToArray();
         }

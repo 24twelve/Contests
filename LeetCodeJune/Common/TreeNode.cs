@@ -24,8 +24,8 @@ namespace LeetCodeJune.Common
         [NotNull]
         public string Print(bool printNextNodes = false)
         {
-            var copy = TreeNodeExtensions.Copy(this);
-            TreeNodeExtensions.PopulateWithFakeNodes(copy, -1);
+            var copy = this.Copy();
+            copy.PopulateWithFakeNodes(-1);
 
             if (copy.IsLeaf())
                 return PrintNode(this, printNextNodes);
@@ -88,7 +88,8 @@ namespace LeetCodeJune.Common
         [NotNull]
         private static string PrintNode([CanBeNull] TreeNode node, bool printNextNodes)
         {
-            if (node == null || node.val == -1) return " ";
+            if (node == null || node.val == -1)
+                return " ";
             var result = $"{node.val}";
             if (printNextNodes)
                 result = $"{node.val}->{node.next?.val}";

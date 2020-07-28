@@ -38,7 +38,8 @@ namespace LeetCodeJune.Common
 
         private static void PopulateWithFakeNodes(this TreeNode root, int fakeNodeValue, int currentHeight)
         {
-            if (currentHeight <= 1) return;
+            if (currentHeight <= 1)
+                return;
             if (root.left == null)
                 root.left = new TreeNode(fakeNodeValue);
             if (root.right == null)
