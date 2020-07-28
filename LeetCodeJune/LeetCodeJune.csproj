@@ -57,6 +57,7 @@
     <Compile Include="Common\PrintTreeNodeTests.cs" />
     <Compile Include="Common\TreeNodeExtensions.cs" />
     <Compile Include="Common\TreeNodeHelpersTests.cs" />
+    <Compile Include="Common\TreeNodePrinter.cs" />
     <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValue.cs" />
     <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValueTests.cs" />
     <Compile Include="FindPoisonedDuration\FindPoisonedDuration.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SameTree\IsSameTree.cs" />
     <Compile Include="SameTree\SameTreeTests.cs" />
+    <Compile Include="SerializeDeserializeBinaryTree\SerializeDeserializeBinaryTree.cs" />
     <Compile Include="Task2\ListNode.cs" />
     <Compile Include="Task2\ListNodeDeleter.cs" />
     <Compile Include="Task3\TwoCityScheduler.cs" />

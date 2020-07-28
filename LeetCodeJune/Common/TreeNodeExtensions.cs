@@ -5,6 +5,23 @@ namespace LeetCodeJune.Common
 {
     public static class TreeNodeExtensions
     {
+        public static string Print([NotNull] this TreeNode node, bool printNextNodes = false)
+        {
+            return new TreeNodePrinter(printNextNodes).Print(node);
+        }
+
+        public static bool IsTriplet([NotNull] this TreeNode node)
+        {
+            if (node.left == null || node.right == null)
+                return false;
+            return node.left.IsLeaf() && node.right.IsLeaf();
+        }
+
+        public static bool IsLeaf([NotNull] this TreeNode node)
+        {
+            return node.left == null && node.right == null;
+        }
+
         [NotNull]
         public static TreeNode PopulateWithFakeNodes([NotNull] this TreeNode root, int fakeNodeValue)
         {

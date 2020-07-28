@@ -112,8 +112,9 @@ namespace LeetCodeJune.PopulateNextRightPointers2
         private void Assert(TreeNode actual, TreeNode expected)
         {
             PopulateNextRightPointer2.Populate(actual);
-            Console.WriteLine($"Expected:\r\n {expected.Print(true)}");
-            Console.WriteLine($"Actual:\r\n {actual.Print(true)}");
+            var printer = new TreeNodePrinter(shouldPrintNextNodes: true);
+            Console.WriteLine($"Expected:\r\n {printer.Print(expected)}");
+            Console.WriteLine($"Actual:\r\n {printer.Print(actual)}");
             actual.Should().BeEquivalentTo(expected);
         }
     }

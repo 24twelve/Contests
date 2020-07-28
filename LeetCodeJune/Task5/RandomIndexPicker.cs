@@ -6,11 +6,6 @@ namespace LeetCodeJune.Task5
 {
     public class RandomIndexPicker
     {
-        private readonly (int Index, double Weigh)[] normalizedWeighs;
-
-
-        private readonly Random random;
-
         public RandomIndexPicker(int[] w)
         {
             random = new Random();
@@ -37,5 +32,10 @@ namespace LeetCodeJune.Task5
 
             return normalizedWeighs.Last().Index;
         }
+
+        private readonly (int Index, double Weigh)[] normalizedWeighs;
+
+
+        private readonly Random random;
     }
 }

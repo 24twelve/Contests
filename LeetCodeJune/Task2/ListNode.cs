@@ -2,9 +2,6 @@
 {
     public class ListNode
     {
-        public ListNode next;
-        public int val;
-
         public ListNode(int x)
         {
             val = x;
@@ -14,5 +11,8 @@
         {
             return $"{val}->{next}";
         }
+
+        public ListNode next;
+        public int val;
     }
 }
