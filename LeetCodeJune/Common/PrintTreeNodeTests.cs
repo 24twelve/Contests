@@ -67,7 +67,7 @@ namespace LeetCodeJune.Common
             root.right.left.next = root.right.right;
 
             var expected = @"
-        1       
+        1->       
   2->3     3->  
 4->4   4->6 6->7   7->";
 

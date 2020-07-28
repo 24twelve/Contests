@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\PrintTreeNodeTests.cs" />
-    <Compile Include="Common\TreeNodeHelpers.cs" />
+    <Compile Include="Common\TreeNodeExtensions.cs" />
     <Compile Include="Common\TreeNodeHelpersTests.cs" />
     <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValue.cs" />
     <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValueTests.cs" />
@@ -65,8 +65,7 @@
     <Compile Include="LongestUnivaluePath\LongestUnivaluePath.cs" />
     <Compile Include="BinaryTreeInvertor\BinaryTreeInvertor.cs" />
     <Compile Include="LongestUnivaluePath\LongestUnivaluePathTests.cs" />
-    <Compile Include="PopulateNextRightPointers\PopulateNextRightPointer.cs" />
-    <Compile Include="PopulateNextRightPointers\PopulateNextRightPointerTests.cs" />
+    <Compile Include="PopulateNextRightPointers2\PopulateNextRightPointer2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SameTree\IsSameTree.cs" />
     <Compile Include="SameTree\SameTreeTests.cs" />

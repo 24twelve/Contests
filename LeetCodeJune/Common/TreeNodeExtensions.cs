@@ -3,9 +3,10 @@ using JetBrains.Annotations;
 
 namespace LeetCodeJune.Common
 {
-    public static class TreeNodeHelpers
+    public static class TreeNodeExtensions
     {
-        public static TreeNode PopulateWithFakeNodes([NotNull] TreeNode root, int fakeNodeValue)
+        [NotNull]
+        public static TreeNode PopulateWithFakeNodes([NotNull] this TreeNode root, int fakeNodeValue)
         {
             var height = CalculateHeight(root);
             PopulateWithFakeNodes(root, fakeNodeValue, height);
@@ -13,7 +14,7 @@ namespace LeetCodeJune.Common
         }
 
         [NotNull]
-        public static TreeNode Copy([NotNull] TreeNode root)
+        public static TreeNode Copy([NotNull] this TreeNode root)
         {
             var result = new TreeNode(root.val);
             result.next = root.next;
@@ -24,7 +25,7 @@ namespace LeetCodeJune.Common
             return result;
         }
 
-        public static int CalculateHeight([NotNull] TreeNode root)
+        public static int CalculateHeight([NotNull] this TreeNode root)
         {
             if (root == null)
                 throw new ArgumentNullException();
@@ -35,7 +36,7 @@ namespace LeetCodeJune.Common
         }
 
 
-        private static void PopulateWithFakeNodes(TreeNode root, int fakeNodeValue, int currentHeight)
+        private static void PopulateWithFakeNodes(this TreeNode root, int fakeNodeValue, int currentHeight)
         {
             if (currentHeight <= 1) return;
             if (root.left == null)
@@ -46,7 +47,7 @@ namespace LeetCodeJune.Common
             PopulateWithFakeNodes(root.right, fakeNodeValue, currentHeight - 1);
         }
 
-        private static void CalculateHeight([NotNull] TreeNode node, int currentFloor, ref int maxFloor)
+        private static void CalculateHeight([NotNull] this TreeNode node, int currentFloor, ref int maxFloor)
         {
             currentFloor++;
             maxFloor = Math.Max(currentFloor, maxFloor);

@@ -24,13 +24,18 @@ namespace LeetCodeJune.Common
         [NotNull]
         public string Print(bool printNextNodes = false)
         {
-            var copy = TreeNodeHelpers.Copy(this);
-            TreeNodeHelpers.PopulateWithFakeNodes(copy, -1);
+            var copy = TreeNodeExtensions.Copy(this);
+            TreeNodeExtensions.PopulateWithFakeNodes(copy, -1);
 
             if (copy.IsLeaf())
-                return val.ToString();
+                return PrintNode(this, printNextNodes);
 
             return string.Join("\r\n", PrintRecursively(copy, printNextNodes));
+        }
+
+        public override string ToString()
+        {
+            return val.ToString();
         }
 
 
@@ -38,8 +43,8 @@ namespace LeetCodeJune.Common
         {
             if (node.IsTriplet())
                 return PrintTriplet(node, printNextNodes);
-            return ConnectToRoot(node.val, PrintRecursively(node.left, printNextNodes),
-                PrintRecursively(node.right, printNextNodes));
+            return ConnectToRoot(node, PrintRecursively(node.left, printNextNodes),
+                PrintRecursively(node.right, printNextNodes), printNextNodes);
         }
 
         private static string[] PrintTriplet(TreeNode node, bool printNextNodes)
@@ -53,8 +58,8 @@ namespace LeetCodeJune.Common
 
         [NotNull]
         [ItemNotNull]
-        private static string[] ConnectToRoot(int root, [NotNull] [ItemNotNull] string[] leftArr,
-            [NotNull] [ItemNotNull] string[] rightArr)
+        private static string[] ConnectToRoot(TreeNode root, [NotNull] [ItemNotNull] string[] leftArr,
+            [NotNull] [ItemNotNull] string[] rightArr, bool printNextNodes)
         {
             if (leftArr.Length != rightArr.Length)
                 throw new ArgumentException("Arguments should have equal length");
@@ -64,7 +69,7 @@ namespace LeetCodeJune.Common
 
             var baseLength = result[0].Length;
             var baseStr = string.Join("", Enumerable.Repeat(" ", baseLength));
-            result.Insert(0, ReplaceChar(baseStr, root.ToString(), baseLength / 2));
+            result.Insert(0, ReplaceChar(baseStr, PrintNode(root, printNextNodes), baseLength / 2));
             return result.ToArray();
         }
 
