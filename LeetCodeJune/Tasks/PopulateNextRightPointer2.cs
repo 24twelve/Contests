@@ -11,9 +11,6 @@ namespace LeetCodeJune.Tasks
     {
         public static TreeNode Populate(TreeNode root)
         {
-            if (root == null)
-                return null;
-
             var queue = new Queue<TreeNode>();
             queue.Enqueue(root);
             var buffer = new List<TreeNode>();
@@ -74,7 +71,7 @@ namespace LeetCodeJune.Tasks
         {
             var root = new TreeNode(1, new TreeNode(2), new TreeNode(3));
             var expectedRoot = root.Copy();
-            expectedRoot.left.next = expectedRoot.right;
+            expectedRoot.left!.next = expectedRoot.right;
             Assert(root, expectedRoot);
         }
 
@@ -82,15 +79,15 @@ namespace LeetCodeJune.Tasks
         public void TestTripletsLevel3()
         {
             var root = new TreeNode(1, new TreeNode(2), new TreeNode(3));
-            root.left.left = new TreeNode(4);
+            root.left!.left = new TreeNode(4);
             root.left.right = new TreeNode(5);
-            root.right.left = new TreeNode(6);
+            root.right!.left = new TreeNode(6);
             root.right.right = new TreeNode(7);
             var expectedRoot = root.Copy();
-            expectedRoot.left.next = expectedRoot.right;
-            expectedRoot.left.left.next = expectedRoot.left.right;
-            expectedRoot.left.right.next = expectedRoot.right.left;
-            expectedRoot.right.left.next = expectedRoot.right.right;
+            expectedRoot.left!.next = expectedRoot.right;
+            expectedRoot.left.left!.next = expectedRoot.left.right;
+            expectedRoot.left.right!.next = expectedRoot.right!.left;
+            expectedRoot.right.left!.next = expectedRoot.right.right;
 
             Assert(root, expectedRoot);
         }
@@ -99,11 +96,11 @@ namespace LeetCodeJune.Tasks
         public void TestHangingLevel3()
         {
             var root = new TreeNode(1, left: new TreeNode(2), right: new TreeNode(3));
-            root.left.left = new TreeNode(4);
-            root.right.right = new TreeNode(7);
+            root.left!.left = new TreeNode(4);
+            root.right!.right = new TreeNode(7);
             var expectedRoot = root.Copy();
-            expectedRoot.left.next = expectedRoot.right;
-            expectedRoot.left.left.next = expectedRoot.right.right;
+            expectedRoot.left!.next = expectedRoot.right;
+            expectedRoot.left.left!.next = expectedRoot.right!.right;
 
             Assert(root, expectedRoot);
         }

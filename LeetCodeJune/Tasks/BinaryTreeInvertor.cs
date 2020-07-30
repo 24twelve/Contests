@@ -7,7 +7,7 @@ namespace LeetCodeJune.Tasks
 {
     public static class BinaryTreeInvertor
     {
-        public static TreeNode InvertTree(TreeNode root)
+        public static TreeNode? InvertTree(TreeNode? root)
         {
             if (root == null)
                 return null;
@@ -78,11 +78,10 @@ namespace LeetCodeJune.Tasks
         [Test]
         public void InvertNull()
         {
-            TreeNode root = null;
-            Assert(root, root);
+            Assert(null, null);
         }
 
-        private static void Assert(TreeNode inputRoot, TreeNode expectedRoot)
+        private static void Assert(TreeNode? inputRoot, TreeNode? expectedRoot)
         {
             var actual = BinaryTreeInvertor.InvertTree(inputRoot);
             Console.WriteLine($"Input: \r\n{inputRoot}");

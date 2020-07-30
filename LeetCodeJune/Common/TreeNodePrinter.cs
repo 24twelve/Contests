@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 
 namespace LeetCodeJune.Common
 {
@@ -13,8 +12,7 @@ namespace LeetCodeJune.Common
         }
 
         //todo: several digit numbers and other next nodes
-        [NotNull]
-        public string Print(TreeNode node)
+        public string Print(TreeNode? node)
         {
             if (node == null)
                 return "null";
@@ -37,8 +35,8 @@ namespace LeetCodeJune.Common
         {
             if (node.IsTriplet())
                 return PrintTriplet(node);
-            return ConnectToRoot(node, PrintRecursively(node.left),
-                PrintRecursively(node.right));
+            return ConnectToRoot(node, PrintRecursively(node.left!),
+                PrintRecursively(node.right!));
         }
 
         private string[] PrintTriplet(TreeNode node)
@@ -46,14 +44,11 @@ namespace LeetCodeJune.Common
             return new[]
             {
                 $"  {PrintNode(node)}  ",
-                $"{PrintNode(node.left)}   {PrintNode(node.right)}"
+                $"{PrintNode(node.left!)}   {PrintNode(node.right!)}"
             };
         }
 
-        [NotNull]
-        [ItemNotNull]
-        private string[] ConnectToRoot(TreeNode root, [NotNull] [ItemNotNull] string[] leftArr,
-            [NotNull] [ItemNotNull] string[] rightArr)
+        private string[] ConnectToRoot(TreeNode root, string[] leftArr, string[] rightArr)
         {
             if (leftArr.Length != rightArr.Length)
                 throw new ArgumentException("Arguments should have equal length");
@@ -68,8 +63,7 @@ namespace LeetCodeJune.Common
         }
 
 
-        [NotNull]
-        private string PrintNode([CanBeNull] TreeNode node)
+        private string PrintNode(TreeNode node)
         {
             if (node == null || node.IsFake)
                 return "-";
@@ -79,8 +73,7 @@ namespace LeetCodeJune.Common
             return result;
         }
 
-        [NotNull]
-        private string ReplaceChar([NotNull] string str, [NotNull] string character, int index)
+        private string ReplaceChar(string str, string character, int index)
         {
             str = str.Remove(index, 1);
             return str.Insert(index, character);

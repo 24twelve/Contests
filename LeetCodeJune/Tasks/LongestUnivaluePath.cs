@@ -9,7 +9,7 @@ namespace LeetCodeJune.Tasks
 {
     public static class LongestUnivaluePath
     {
-        public static int Find(TreeNode root)
+        public static int Find(TreeNode? root)
         {
             if (root == null)
                 return 0;
@@ -92,8 +92,8 @@ namespace LeetCodeJune.Tasks
         public void TestTwoPaths_TwoLevels()
         {
             var root = new TreeNode(1, new TreeNode(1), new TreeNode(1));
-            root.left.left = new TreeNode(1);
-            root.right.right = new TreeNode(1);
+            root.left!.left = new TreeNode(1);
+            root.right!.right = new TreeNode(1);
             Console.WriteLine(root.Print());
             LongestUnivaluePath.Find(root).Should().Be(4);
         }

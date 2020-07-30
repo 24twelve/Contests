@@ -9,8 +9,6 @@ namespace LeetCodeJune.Tasks
     {
         public static int Find(TreeNode root)
         {
-            if (root == null)
-                throw new ArgumentNullException(nameof(root));
             var currentMaxPathLength = 0;
             var currentFurthestLeaf = root.val;
             FindLongestPath(root, 0, ref currentMaxPathLength, ref currentFurthestLeaf);
@@ -37,12 +35,6 @@ namespace LeetCodeJune.Tasks
 
     public class FindBottomLeftTreeValueTests
     {
-        [Test]
-        public void TestNull_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => FindBottomLeftTreeValue.Find(null));
-        }
-
         [Test]
         public void TestSingleNode()
         {

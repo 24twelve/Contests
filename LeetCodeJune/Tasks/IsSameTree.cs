@@ -6,7 +6,7 @@ namespace LeetCodeJune.Tasks
 {
     public static class IsSameTree
     {
-        public static bool IsSame(TreeNode first, TreeNode second)
+        public static bool IsSame(TreeNode? first, TreeNode? second)
         {
             if (first == second)
                 return true;

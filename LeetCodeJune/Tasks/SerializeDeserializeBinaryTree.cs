@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using JetBrains.Annotations;
 using LeetCodeJune.Common;
 using NUnit.Framework;
 
@@ -10,12 +9,11 @@ namespace LeetCodeJune.Tasks
 {
     public static class SerializeDeserializeBinaryTree
     {
-        [NotNull]
-        public static string Serialize([CanBeNull] TreeNode root)
+        public static string Serialize(TreeNode? root)
         {
             if (root == null)
                 return "[]";
-            var result = new List<string> {root.val.ToString()};
+            var result = new List<string?> {root.val.ToString()};
 
             var queue = new Queue<TreeNode>();
             queue.Enqueue(root);
@@ -43,12 +41,11 @@ namespace LeetCodeJune.Tasks
             }
 
             result.RemoveRange(lastNotNullIndex + 1, result.Count - lastNotNullIndex - 1);
-            result = result.Select(x => x ?? "null").ToList();
+            result = result.Select(x => x ?? "null").ToList()!;
             return $"[{string.Join(",", result)}]";
         }
 
-        [CanBeNull]
-        public static TreeNode Deserialize([NotNull] string str)
+        public static TreeNode? Deserialize(string str)
         {
             if (str == "[]" || str == "[null]")
                 return null;
@@ -57,13 +54,13 @@ namespace LeetCodeJune.Tasks
                 .Select(x => int.TryParse(x, out var value) ? new TreeNode(value) : null)
                 .ToArray();
 
-            var totalQueue = new Queue<TreeNode>(totalNodes);
+            var totalQueue = new Queue<TreeNode?>(totalNodes);
             var root = totalQueue.Dequeue();
-            var currentQueue = new Queue<TreeNode>();
+            var currentQueue = new Queue<TreeNode?>();
             currentQueue.Enqueue(root);
             while (totalQueue.Any())
             {
-                var currentRoot = currentQueue.Dequeue();
+                var currentRoot = currentQueue.Dequeue()!;
                 var currentLeft = totalQueue.Any() ? totalQueue.Dequeue() : null;
                 var currentRight = totalQueue.Any() ? totalQueue.Dequeue() : null;
 
@@ -206,7 +203,7 @@ namespace LeetCodeJune.Tasks
             GrowRightRecursively(root.right, growCount, maxGrowCount);
         }
 
-        private void AssertSerializeDeserialize(TreeNode root, string expectedSerialized)
+        private void AssertSerializeDeserialize(TreeNode? root, string expectedSerialized)
         {
             Console.WriteLine($"Provided tree:\r\n{root.Print()}");
             var serialized = SerializeDeserializeBinaryTree.Serialize(root);

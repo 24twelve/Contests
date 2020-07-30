@@ -1,37 +1,34 @@
 ﻿using System;
-using JetBrains.Annotations;
 
 namespace LeetCodeJune.Common
 {
     public static class TreeNodeExtensions
     {
-        public static string Print([NotNull] this TreeNode node, bool printNextNodes = false)
+        public static string Print(this TreeNode? node, bool printNextNodes = false)
         {
             return new TreeNodePrinter(printNextNodes).Print(node);
         }
 
-        public static bool IsTriplet([NotNull] this TreeNode node)
+        public static bool IsTriplet(this TreeNode node)
         {
             if (node.left == null || node.right == null)
                 return false;
             return node.left.IsLeaf() && node.right.IsLeaf();
         }
 
-        public static bool IsLeaf([NotNull] this TreeNode node)
+        public static bool IsLeaf(this TreeNode node)
         {
             return node.left == null && node.right == null;
         }
 
-        [NotNull]
-        public static TreeNode PopulateWithFakeNodes([NotNull] this TreeNode root)
+        public static TreeNode PopulateWithFakeNodes(this TreeNode root)
         {
             var height = CalculateHeight(root);
             PopulateWithFakeNodes(root, height);
             return root;
         }
 
-        [NotNull]
-        public static TreeNode Copy([NotNull] this TreeNode root)
+        public static TreeNode Copy(this TreeNode root)
         {
             var result = new TreeNode(root.val);
             result.next = root.next;
@@ -42,11 +39,8 @@ namespace LeetCodeJune.Common
             return result;
         }
 
-        public static int CalculateHeight([NotNull] this TreeNode root)
+        public static int CalculateHeight(this TreeNode root)
         {
-            if (root == null)
-                throw new ArgumentNullException();
-
             var height = 0;
             CalculateHeight(root, 0, ref height);
             return height;
@@ -57,15 +51,13 @@ namespace LeetCodeJune.Common
         {
             if (currentHeight <= 1)
                 return;
-            if (root.left == null)
-                root.left = new TreeNode(-1) {IsFake = true};
-            if (root.right == null)
-                root.right = new TreeNode(-1) {IsFake = true};
+            root.left ??= new TreeNode(-1) {IsFake = true};
+            root.right ??= new TreeNode(-1) {IsFake = true};
             PopulateWithFakeNodes(root.left, currentHeight - 1);
             PopulateWithFakeNodes(root.right, currentHeight - 1);
         }
 
-        private static void CalculateHeight([NotNull] this TreeNode node, int currentFloor, ref int maxFloor)
+        private static void CalculateHeight(this TreeNode node, int currentFloor, ref int maxFloor)
         {
             currentFloor++;
             maxFloor = Math.Max(currentFloor, maxFloor);

@@ -1,17 +1,10 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 
 namespace LeetCodeJune.Common.Tests
 {
     public class TreeNodeHelpersTests
     {
-        [Test]
-        public void TestCalculateHeight_Null_Throws()
-        {
-            Assert.Throws<ArgumentNullException>(() => TreeNodeExtensions.CalculateHeight(null));
-        }
-
         [Test]
         public void TestCalculateHeight()
         {
@@ -43,7 +36,7 @@ namespace LeetCodeJune.Common.Tests
             copyTriplet.Should().NotBeSameAs(triplet);
 
             var tripletWithNextNodes = new TreeNode(1, new TreeNode(2), new TreeNode(3));
-            tripletWithNextNodes.left.next = tripletWithNextNodes.right;
+            tripletWithNextNodes.left!.next = tripletWithNextNodes.right;
             var copyTripletWithNextNodes = tripletWithNextNodes.Copy();
             copyTripletWithNextNodes.Should().BeEquivalentTo(tripletWithNextNodes);
             copyTripletWithNextNodes.Should().NotBeSameAs(tripletWithNextNodes);

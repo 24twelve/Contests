@@ -8,7 +8,7 @@ namespace LeetCodeJune.Tasks
     {
         public static void DeleteNode(ListNode node)
         {
-            var temp = node.next;
+            var temp = node.next!;
             node.val = temp.val;
             node.next = temp.next;
         }
@@ -50,7 +50,7 @@ namespace LeetCodeJune.Tasks
             return $"{val}->{next}";
         }
 
-        public ListNode next;
+        public ListNode? next;
         public int val;
     }
 }

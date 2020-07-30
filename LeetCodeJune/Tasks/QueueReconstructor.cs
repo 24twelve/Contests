@@ -10,7 +10,6 @@ namespace LeetCodeJune.Tasks
     {
         public static int[][] ReconstructQueue(int[][] people)
         {
-            var result = new int[people.Length][];
             Array.Sort(people, new ArrayComparer());
 
             var list = new List<int[]>();
@@ -22,8 +21,18 @@ namespace LeetCodeJune.Tasks
 
         private class ArrayComparer : IComparer<int[]>
         {
-            public int Compare(int[] x, int[] y)
+            public int Compare(int[]? x, int[]? y)
             {
+                if (x == null)
+                {
+                    if (y == null)
+                        return 1;
+                    return -1;
+                }
+
+                if (y == null)
+                    return -1;
+
                 if (x[0] != y[0])
                     return y[0] - x[0];
                 return x[1] - y[1];
