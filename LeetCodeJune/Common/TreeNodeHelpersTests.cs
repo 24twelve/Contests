@@ -59,29 +59,30 @@ namespace LeetCodeJune.Common
         public void TestPopulateWithFakeNodes()
         {
             var oneNodeRight = new TreeNode(1, right: new TreeNode(3));
-            var oneNodeRightPopulated = new TreeNode(1, new TreeNode(-1), new TreeNode(3));
-            oneNodeRight.PopulateWithFakeNodes(-1);
+            var oneNodeRightPopulated = new TreeNode(1, new TreeNode(-1) {IsFake = true}, new TreeNode(3));
+            oneNodeRight.PopulateWithFakeNodes();
             oneNodeRight.Should().BeEquivalentTo(oneNodeRightPopulated);
 
             var oneNodeLeft = new TreeNode(1, new TreeNode(3));
-            var oneNodeLeftPopulated = new TreeNode(1, new TreeNode(3), new TreeNode(-1));
-            oneNodeLeft.PopulateWithFakeNodes(-1);
+            var oneNodeLeftPopulated = new TreeNode(1, new TreeNode(3), new TreeNode(-1) {IsFake = true});
+            oneNodeLeft.PopulateWithFakeNodes();
             oneNodeLeft.Should().BeEquivalentTo(oneNodeLeftPopulated);
 
             var triplet = new TreeNode(1, new TreeNode(2), new TreeNode(3));
             var notPopulatedTriplet = new TreeNode(1, new TreeNode(2), new TreeNode(3));
-            triplet.PopulateWithFakeNodes(-1);
+            triplet.PopulateWithFakeNodes();
             triplet.Should().BeEquivalentTo(notPopulatedTriplet);
 
             var level3Tree = new TreeNode(1, right: new TreeNode(2, right: new TreeNode(3)));
             var level3TreePopulated = new TreeNode(1);
-            level3TreePopulated.right = new TreeNode(2, new TreeNode(-1), new TreeNode(3));
-            level3TreePopulated.left = new TreeNode(-1, new TreeNode(-1), new TreeNode(-1));
-            level3Tree.PopulateWithFakeNodes(-1);
+            level3TreePopulated.right = new TreeNode(2, new TreeNode(-1) {IsFake = true}, new TreeNode(3));
+            level3TreePopulated.left =
+                new TreeNode(-1, new TreeNode(-1) {IsFake = true}, new TreeNode(-1) {IsFake = true}) {IsFake = true};
+            level3Tree.PopulateWithFakeNodes();
             level3Tree.Should().BeEquivalentTo(level3TreePopulated);
 
             var singleNode = new TreeNode(1);
-            singleNode.PopulateWithFakeNodes(-1);
+            singleNode.PopulateWithFakeNodes();
             singleNode.Should().BeEquivalentTo(singleNode);
         }
     }

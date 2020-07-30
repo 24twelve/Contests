@@ -30,13 +30,13 @@ namespace LeetCodeJune.Common
             var root1 = new TreeNode(2, right: new TreeNode(4));
             var expected1 = @"
   2  
-    4";
+-   4";
             Assert(root1, expected1);
 
             var root2 = new TreeNode(2, new TreeNode(4));
             var expected2 = @"
   2  
-4    ";
+4   -";
             Assert(root2, expected2);
         }
 
@@ -80,8 +80,8 @@ namespace LeetCodeJune.Common
             var expected = @"
            1           
      2           3     
-  4     4           7  
-7   9     0       8   9";
+  4     4     -     7  
+7   9 -   0 -   - 8   9";
 
             var root = new TreeNode(1);
             root.right = new TreeNode(3);

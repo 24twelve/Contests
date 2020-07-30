@@ -23,10 +23,10 @@ namespace LeetCodeJune.Common
         }
 
         [NotNull]
-        public static TreeNode PopulateWithFakeNodes([NotNull] this TreeNode root, int fakeNodeValue)
+        public static TreeNode PopulateWithFakeNodes([NotNull] this TreeNode root)
         {
             var height = CalculateHeight(root);
-            PopulateWithFakeNodes(root, fakeNodeValue, height);
+            PopulateWithFakeNodes(root, height);
             return root;
         }
 
@@ -53,16 +53,16 @@ namespace LeetCodeJune.Common
         }
 
 
-        private static void PopulateWithFakeNodes(this TreeNode root, int fakeNodeValue, int currentHeight)
+        private static void PopulateWithFakeNodes(this TreeNode root, int currentHeight)
         {
             if (currentHeight <= 1)
                 return;
             if (root.left == null)
-                root.left = new TreeNode(fakeNodeValue);
+                root.left = new TreeNode(-1) {IsFake = true};
             if (root.right == null)
-                root.right = new TreeNode(fakeNodeValue);
-            PopulateWithFakeNodes(root.left, fakeNodeValue, currentHeight - 1);
-            PopulateWithFakeNodes(root.right, fakeNodeValue, currentHeight - 1);
+                root.right = new TreeNode(-1) {IsFake = true};
+            PopulateWithFakeNodes(root.left, currentHeight - 1);
+            PopulateWithFakeNodes(root.right, currentHeight - 1);
         }
 
         private static void CalculateHeight([NotNull] this TreeNode node, int currentFloor, ref int maxFloor)

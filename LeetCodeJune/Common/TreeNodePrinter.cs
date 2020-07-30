@@ -16,8 +16,15 @@ namespace LeetCodeJune.Common
         [NotNull]
         public string Print(TreeNode node)
         {
+            if (node == null)
+                return "null";
+
+            var height = node.CalculateHeight();
+            if (height > 10)
+                return $"tree of {height} is too high to be printed";
+
             var copy = node.Copy();
-            copy.PopulateWithFakeNodes(-1);
+            copy.PopulateWithFakeNodes();
 
             if (copy.IsLeaf())
                 return PrintNode(node);
@@ -64,8 +71,8 @@ namespace LeetCodeJune.Common
         [NotNull]
         private string PrintNode([CanBeNull] TreeNode node)
         {
-            if (node == null || node.val == -1)
-                return " ";
+            if (node == null || node.IsFake)
+                return "-";
             var result = $"{node.val}";
             if (shouldPrintNextNodes)
                 result = $"{node.val}->{node.next?.val}";

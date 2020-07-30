@@ -9,10 +9,13 @@
             this.right = right;
         }
 
+
         public override string ToString()
         {
             return val.ToString();
         }
+
+        public bool IsFake;
 
         public TreeNode left;
         public TreeNode next;
