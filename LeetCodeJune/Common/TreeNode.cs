@@ -16,7 +16,6 @@
         }
 
         public bool IsFake;
-
         public TreeNode left;
         public TreeNode next;
         public TreeNode right;

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using LeetCodeJune.Common;
 using NUnit.Framework;
 
-namespace LeetCodeJune.SerializeDeserializeBinaryTree
+namespace LeetCodeJune.Tasks
 {
     public static class SerializeDeserializeBinaryTree
     {

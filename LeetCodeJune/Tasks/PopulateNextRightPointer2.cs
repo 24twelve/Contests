@@ -5,7 +5,7 @@ using FluentAssertions;
 using LeetCodeJune.Common;
 using NUnit.Framework;
 
-namespace LeetCodeJune.PopulateNextRightPointers2
+namespace LeetCodeJune.Tasks
 {
     public static class PopulateNextRightPointer2
     {

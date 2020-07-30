@@ -2,8 +2,18 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Task2
+namespace LeetCodeJune.Tasks
 {
+    public static class ListNodeDeleter
+    {
+        public static void DeleteNode(ListNode node)
+        {
+            var temp = node.next;
+            node.val = temp.val;
+            node.next = temp.next;
+        }
+    }
+
     public class DeleteNodeTests
     {
         [Test]
@@ -26,5 +36,21 @@ namespace LeetCodeJune.Task2
             Console.WriteLine($"Actual: \r\n{inputHead}");
             inputHead.Should().BeEquivalentTo(expected);
         }
+    }
+
+    public class ListNode
+    {
+        public ListNode(int x)
+        {
+            val = x;
+        }
+
+        public override string ToString()
+        {
+            return $"{val}->{next}";
+        }
+
+        public ListNode next;
+        public int val;
     }
 }

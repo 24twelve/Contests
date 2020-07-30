@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Common
+namespace LeetCodeJune.Common.Tests
 {
     public class PrintTreeNodeTests
     {

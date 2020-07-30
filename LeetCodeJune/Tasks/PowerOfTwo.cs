@@ -1,8 +1,19 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Task8
+namespace LeetCodeJune.Tasks
 {
+    public static class PowerOfTwo
+    {
+        public static bool IsPowerOfTwo(int n)
+        {
+            if (n <= 0)
+                return false;
+
+            return (n & (n - 1)) == 0;
+        }
+    }
+
     public class PowerOfTwoTests
     {
         [TestCase(0, false)]

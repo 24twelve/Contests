@@ -50,49 +50,36 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\PrintTreeNodeTests.cs" />
+    <Compile Include="Common.Tests\PrintTreeNodeTests.cs" />
     <Compile Include="Common\TreeNodeExtensions.cs" />
-    <Compile Include="Common\TreeNodeHelpersTests.cs" />
+    <Compile Include="Common.Tests\TreeNodeHelpersTests.cs" />
     <Compile Include="Common\TreeNodePrinter.cs" />
-    <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValue.cs" />
-    <Compile Include="FindBottomLeftTreeValue\FindBottomLeftTreeValueTests.cs" />
-    <Compile Include="FindPoisonedDuration\FindPoisonedDuration.cs" />
+    <Compile Include="Tasks\FindBottomLeftTreeValue.cs" />
+    <Compile Include="Tasks\FindPoisonedDuration.cs" />
     <Compile Include="Common\SerializeHelpers.cs" />
-    <Compile Include="FindPoisonedDuration\FindPoisonedDurationTests.cs" />
-    <Compile Include="LongestUnivaluePath\LongestUnivaluePath.cs" />
-    <Compile Include="BinaryTreeInvertor\BinaryTreeInvertor.cs" />
-    <Compile Include="LongestUnivaluePath\LongestUnivaluePathTests.cs" />
-    <Compile Include="PopulateNextRightPointers2\PopulateNextRightPointer2.cs" />
+    <Compile Include="Tasks\LongestUnivaluePath.cs" />
+    <Compile Include="Tasks\BinaryTreeInvertor.cs" />
+    <Compile Include="Tasks\PopulateNextRightPointer2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SameTree\IsSameTree.cs" />
-    <Compile Include="SameTree\SameTreeTests.cs" />
-    <Compile Include="SerializeDeserializeBinaryTree\SerializeDeserializeBinaryTree.cs" />
-    <Compile Include="Task2\ListNode.cs" />
-    <Compile Include="Task2\ListNodeDeleter.cs" />
-    <Compile Include="Task3\TwoCityScheduler.cs" />
-    <Compile Include="Task2\DeleteNodeTests.cs" />
-    <Compile Include="BinaryTreeInvertor\InvertBinaryTreeTests.cs" />
-    <Compile Include="Task3\TwoCitySchedulerTests.cs" />
-    <Compile Include="Task4\ReverseStringTests.cs" />
-    <Compile Include="Task4\StringReverser.cs" />
-    <Compile Include="Task5\RandomIndexPicker.cs" />
-    <Compile Include="Task5\RandomIndexPickerTests.cs" />
-    <Compile Include="Task6\QueueReconstructor.cs" />
-    <Compile Include="Task6\QueueReconstructorTests.cs" />
-    <Compile Include="Task7\CoinChangeCalculator.cs" />
-    <Compile Include="Task7\CoinChangeCalculatorTests.cs" />
-    <Compile Include="Task8\PowerOfTwo.cs" />
+    <Compile Include="Tasks\IsSameTree.cs" />
+    <Compile Include="Tasks\SerializeDeserializeBinaryTree.cs" />
+    <Compile Include="Tasks\ListNodeDeleter.cs" />
+    <Compile Include="Tasks\TwoCityScheduler.cs" />
+    <Compile Include="Tasks\StringReverser.cs" />
+    <Compile Include="Tasks\RandomIndexPicker.cs" />
+    <Compile Include="Tasks\QueueReconstructor.cs" />
+    <Compile Include="Tasks\CoinChangeCalculator.cs" />
+    <Compile Include="Tasks\PowerOfTwo.cs" />
     <Compile Include="Common\TreeNode.cs" />
-    <Compile Include="Task8\PowerOfTwoTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
