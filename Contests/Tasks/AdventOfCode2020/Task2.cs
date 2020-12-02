@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tasks.AdventOfCode2020
+namespace Contests.Tasks.AdventOfCode2020
 {
     public static class Task2
     {

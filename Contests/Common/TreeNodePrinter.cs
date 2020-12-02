@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LeetCodeJune.Common
+namespace Contests.Common
 {
     public class TreeNodePrinter
     {

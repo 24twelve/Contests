@@ -5,7 +5,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tasks
+namespace Contests.Tasks.LeetCode
 {
     public class RandomIndexPicker
     {

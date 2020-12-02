@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LeetCodeJune.Common
+namespace Contests.Common
 {
     public static class TreeNodeExtensions
     {

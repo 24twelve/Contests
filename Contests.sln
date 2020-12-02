@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCodeJune", "LeetCodeJune\LeetCodeJune.csproj", "{0329EE9C-62EC-4E18-A6A1-0682D0DD8E68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contests", "Contests\Contests.csproj", "{0329EE9C-62EC-4E18-A6A1-0682D0DD8E68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tasks
+namespace Contests.Tasks.LeetCode
 {
     public static class StringReverser
     {

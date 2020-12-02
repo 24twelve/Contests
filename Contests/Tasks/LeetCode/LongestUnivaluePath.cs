@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Contests.Common;
 using FluentAssertions;
-using LeetCodeJune.Common;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tasks
+namespace Contests.Tasks.LeetCode
 {
     public static class LongestUnivaluePath
     {

@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Common.Tests
+namespace Contests.Common.Tests
 {
     public class TreeNodeHelpersTests
     {

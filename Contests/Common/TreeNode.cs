@@ -1,4 +1,4 @@
-﻿namespace LeetCodeJune.Common
+﻿namespace Contests.Common
 {
     public class TreeNode
     {

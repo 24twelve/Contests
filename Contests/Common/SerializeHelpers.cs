@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace LeetCodeJune.Common
+namespace Contests.Common
 {
     public static class SerializeHelpers
     {

@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using LeetCodeJune.Common;
+﻿using Contests.Common;
+using FluentAssertions;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tasks
+namespace Contests.Tasks.LeetCode
 {
     public static class IsSameTree
     {

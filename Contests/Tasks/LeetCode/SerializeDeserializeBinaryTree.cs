@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Contests.Common;
 using FluentAssertions;
-using LeetCodeJune.Common;
 using NUnit.Framework;
 
-namespace LeetCodeJune.Tasks
+namespace Contests.Tasks.LeetCode
 {
     public static class SerializeDeserializeBinaryTree
     {
@@ -100,7 +100,7 @@ namespace LeetCodeJune.Tasks
         [Test]
         public void TestTriplet()
         {
-            var root = new TreeNode(1, left: new TreeNode(2), right: new TreeNode(3));
+            var root = new TreeNode(1, new TreeNode(2), new TreeNode(3));
             var expected = "[1,2,3]";
             AssertSerializeDeserialize(root, expected);
         }
@@ -116,7 +116,7 @@ namespace LeetCodeJune.Tasks
         [Test]
         public void TestOnlyLeft()
         {
-            var root = new TreeNode(1, left: new TreeNode(3));
+            var root = new TreeNode(1, new TreeNode(3));
             var expected = "[1,3]";
             AssertSerializeDeserialize(root, expected);
         }
@@ -124,7 +124,7 @@ namespace LeetCodeJune.Tasks
         [Test]
         public void TestOnlyRightOnlyLeft()
         {
-            var root = new TreeNode(1, right: new TreeNode(2, left: new TreeNode(3)));
+            var root = new TreeNode(1, right: new TreeNode(2, new TreeNode(3)));
             var expected = "[1,null,2,3]";
             AssertSerializeDeserialize(root, expected);
         }
@@ -134,7 +134,7 @@ namespace LeetCodeJune.Tasks
         {
             var root = new TreeNode(1);
             root.left = new TreeNode(2);
-            root.right = new TreeNode(3, left: new TreeNode(4), right: new TreeNode(5));
+            root.right = new TreeNode(3, new TreeNode(4), new TreeNode(5));
             var expected = "[1,2,3,null,null,4,5]";
             AssertSerializeDeserialize(root, expected);
         }
@@ -144,8 +144,8 @@ namespace LeetCodeJune.Tasks
         {
             var root = new TreeNode();
             root.left = new TreeNode(1, new TreeNode(2), new TreeNode(3, right: new TreeNode(4)));
-            root.right = new TreeNode(5, left: new TreeNode(6),
-                right: new TreeNode(7, left: new TreeNode(8, right: new TreeNode(9))));
+            root.right = new TreeNode(5, new TreeNode(6),
+                new TreeNode(7, new TreeNode(8, right: new TreeNode(9))));
             var expected =
                 "[0,1,5,2,3,6,7,null,null,null,4,null,null,8,null,null,null,null,9]";
             AssertSerializeDeserialize(root, expected);
