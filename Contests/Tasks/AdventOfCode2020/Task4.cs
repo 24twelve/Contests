@@ -12,21 +12,29 @@ namespace Contests.Tasks.AdventOfCode2020
             var passports = passportsRaw.Split("\r\n\r\n");
             var result = 0;
             foreach (var passport in passports)
-            {
-                var presentTags = passport.Replace(oldChar: '\n', newChar: ' ')
-                    .Split(" ")
-                    .Select(x => x.Split(":"))
-                    .Select(x => (x[0], x.Length > 1 ? x[1] : null))
-                    .ToArray();
-                //todo: dont iterate twice
-                if (presentTags.Select(x => x.Item1).Intersect(RequiredPassportTags).Count() !=
-                    RequiredPassportTags.Length)
-                    continue;
-                if (presentTags.All(x => IsValidTag(x.Item1, x.Item2)))
+                if (IsValidPassport(passport))
                     result++;
-            }
 
             return result;
+        }
+
+        public static bool IsValidPassport(string passport)
+        {
+            //todo: dont iterate twice
+            //todo: do some refactoring
+            var presentTags = passport
+                .Replace(oldChar: '\n', newChar: ' ')
+                .Replace(oldChar: '\r', newChar: ' ')
+                .Split(" ")
+                .Select(x => x.Split(":"))
+                .Select(x => (x[0], x.Length > 1 ? x[1] : null))
+                .ToArray();
+            if (presentTags.Select(x => x.Item1).Intersect(RequiredPassportTags).Count() !=
+                RequiredPassportTags.Length)
+                return false;
+            if (presentTags.All(x => IsValidTag(x.Item1, x.Item2)))
+                return true;
+            return false;
         }
 
         private static bool IsValidTag(string tag, string? value)
@@ -52,7 +60,7 @@ namespace Contests.Tasks.AdventOfCode2020
                     var measurement = value.Substring(startIndex: 0, value.Length - 2);
                     if (!int.TryParse(measurement, out var measurementValue))
                         return false;
-                    var unit = value.Substring(startIndex:value.Length - 2, length: 2);
+                    var unit = value.Substring(startIndex: value.Length - 2, length: 2);
                     switch (unit)
                     {
                         case "cm":
@@ -142,6 +150,39 @@ byr:1900 iyr:2017 cid:147 hgt:183cm";
             var valid = @"ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1920 iyr:2017 cid:147 hgt:183cm";
             Task4.CountValidPassports(valid).Should().Be(1);
+        }
+
+        [Test]
+        public void TestAllInvalidExamplePassports()
+        {
+            var input = @"eyr:1972 cid:100
+hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
+
+iyr:2019
+hcl:#602927 eyr:1967 hgt:170cm
+ecl:grn pid:012533040 byr:1946
+
+hcl:dab227 iyr:2012
+ecl:brn hgt:182cm pid:021572410 eyr:2020 byr:1992 cid:277
+
+hgt:59cm ecl:zzz
+eyr:2038 hcl:74454a iyr:2023
+pid:3556412378 byr:2007";
+            Task4.CountValidPassports(input).Should().Be(0);
+        }
+
+        [TestCase(@"pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
+        hcl:#623a2f")]
+        [TestCase(@"eyr:2029 ecl:blu cid:129 byr:1989
+iyr:2014 pid:896056539 hcl:#a97842 hgt:165cm")]
+        [TestCase(@"hcl:#888785
+hgt:164cm byr:2001 iyr:2015 cid:88
+pid:545766238 ecl:hzl
+eyr:2022")]
+        [TestCase(@"iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719")]
+        public void TestValidPassports(string passport)
+        {
+            Task4.IsValidPassport(passport).Should().BeTrue();
         }
 
         [Test]
@@ -1152,7 +1193,7 @@ hgt:173cm byr:1925 pid:070222017 iyr:2013 hcl:#ceb3a1 ecl:gry eyr:2024
 
             #endregion
 
-            Task4.CountValidPassports(input).Should().Be(200);
+            Task4.CountValidPassports(input).Should().Be(175);
         }
     }
 }
