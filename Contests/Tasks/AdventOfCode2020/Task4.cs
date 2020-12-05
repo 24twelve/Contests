@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
+using Contests.Common;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -9,32 +11,36 @@ namespace Contests.Tasks.AdventOfCode2020
     {
         public static int CountValidPassports(string passportsRaw)
         {
-            var passports = passportsRaw.Split("\r\n\r\n");
-            var result = 0;
-            foreach (var passport in passports)
-                if (IsValidPassport(passport))
-                    result++;
-
-            return result;
+            return passportsRaw.Split("\r\n\r\n").Count(IsValidPassport);
         }
 
         public static bool IsValidPassport(string passport)
         {
-            //todo: dont iterate twice
-            //todo: do some refactoring
-            var presentTags = passport
+            var tags = passport
                 .Replace(oldChar: '\n', newChar: ' ')
                 .Replace(oldChar: '\r', newChar: ' ')
                 .Split(" ")
                 .Select(x => x.Split(":"))
-                .Select(x => (x[0], x.Length > 1 ? x[1] : null))
+                .Where(x => RequiredPassportTags.Contains(x[0]))
+                .Select(x => (x[0], x.GetValueOrNull(1)))
                 .ToArray();
-            if (presentTags.Select(x => x.Item1).Intersect(RequiredPassportTags).Count() !=
-                RequiredPassportTags.Length)
+
+            if (tags.Length < RequiredPassportTags.Length)
                 return false;
-            if (presentTags.All(x => IsValidTag(x.Item1, x.Item2)))
-                return true;
-            return false;
+
+            var tagsLeft = new List<string>(RequiredPassportTags);
+            foreach (var (tagName, value) in tags)
+            {
+                if (tagsLeft.Count == 0)
+                    return true;
+                if (!tagsLeft.Contains(tagName))
+                    continue;
+                if (IsValidTag(tagName, value))
+                    tagsLeft.Remove(tagName);
+                else
+                    return false;
+            }
+            return !tagsLeft.Any();
         }
 
         private static bool IsValidTag(string tag, string? value)
@@ -183,6 +189,15 @@ eyr:2022")]
         public void TestValidPassports(string passport)
         {
             Task4.IsValidPassport(passport).Should().BeTrue();
+        }
+
+        [TestCase(@"pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
+        hcl:#623a2f pid:087499704", true)]
+        [TestCase(@"pid:087499704 pid:087499704 pid:087499704 pid:087499704 pid:087499704 pid:087499704 pid:087499704",
+            false)]
+        public void TestDuplicateTags(string passport, bool expected)
+        {
+            Task4.IsValidPassport(passport).Should().Be(expected);
         }
 
         [Test]
