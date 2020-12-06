@@ -7,18 +7,16 @@ namespace Contests.Tasks.AdventOfCode2020
 {
     public static class Task5
     {
-        public static Seat? FindLastEmptySeat(Seat[] occupiedSeats)
+        public static int? FindOnlyEmptySeat(Seat[] occupiedSeats)
         {
-            var totalSeatsInRow = 8;
-            var totalSeatNumberSum = 28; //0 + 1 + 2 + 3 + 4 + 5 + 6 + 7
-            var seatRows = occupiedSeats.ToLookup(x => x.Row);
-            foreach (var row in seatRows)
-                if (row.Count() < totalSeatsInRow)
-                {
-                    var missingSeatNumber = totalSeatNumberSum - row.Select(c => c.Column).Sum();
-                    return new Seat(row: row.First().Row, column: missingSeatNumber);
-                }
-
+            var orderedIds = occupiedSeats.Select(x => x.Id)
+                .OrderBy(x => x)
+                .ToArray();
+            for (var i = 0; i < orderedIds.Length-1; i++)
+            {
+                if ((orderedIds[i + 1] - orderedIds[i]) > 1)
+                    return orderedIds[i] + 1;
+            }
             return null;
         }
 
@@ -81,9 +79,8 @@ namespace Contests.Tasks.AdventOfCode2020
                 .SelectMany(x => x)
                 .Where(x => x.Column != 1 || x.Row != 1)
                 .ToArray();
-            var lastEmptySeat = Task5.FindLastEmptySeat(seats);
-            lastEmptySeat!.Column.Should().Be(1);
-            lastEmptySeat.Row.Should().Be(1);
+            var lastEmptySeat = Task5.FindOnlyEmptySeat(seats);
+            lastEmptySeat.Should().Be(9);
         }
 
         [Test]
@@ -229,7 +226,7 @@ namespace Contests.Tasks.AdventOfCode2020
             };
             var seats = input.Select(Task5.ParseSeatPosition).ToArray();
             seats.OrderByDescending(x => x.Id).First().Id.Should().Be(980);
-            Task5.FindLastEmptySeat(seats)!.Id.Should().Be(7878789);
+            Task5.FindOnlyEmptySeat(seats)!.Should().Be(607);
         }
     }
 }
