@@ -40,6 +40,7 @@ namespace Contests.Tasks.AdventOfCode2020
                 else
                     return false;
             }
+
             return !tagsLeft.Any();
         }
 
