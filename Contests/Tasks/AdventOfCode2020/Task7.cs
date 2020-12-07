@@ -11,16 +11,30 @@ namespace Contests.Tasks.AdventOfCode2020
         //todo: configure codestyle to stop moving properties top
         //todo: stateless so tests wont break
         //todo: tuples dont look good
+        //todo: fix lexicon
         public static IReadOnlyDictionary<string, LuggageRule> GetKnownRules => KnownRules;
 
         public static int GetMinimalContainerCountForColor(string color)
         {
             if (!KnownRules.ContainsKey(color))
                 return 0;
-            var rule = KnownRules[color];
-            return -1;
+            var result = 0;
+            var stack = new Stack<(LuggageRule, int)>();
+            stack.Push((KnownRules[color], 1));
+            while (stack.Any())
+            {
+                var (item, multiplier) = stack.Pop();
+                var shouldContainRules = item.ShouldContain;
+                foreach (var (rule, count) in shouldContainRules)
+                {
+                    stack.Push((rule,count*multiplier));
+                    result += count*multiplier;
+                }
+            }
 
+            return result;
         }
+
         public static int GetPossibleContainersCountForColor(string color)
         {
             if (!KnownRules.ContainsKey(color))
@@ -128,6 +142,7 @@ namespace Contests.Tasks.AdventOfCode2020
             };
             Task7.ParseRules(input);
             Task7.GetPossibleContainersCountForColor("shiny gold").Should().Be(4);
+            Task7.GetMinimalContainerCountForColor("shiny gold").Should().Be(32);
         }
 
 
@@ -726,9 +741,10 @@ namespace Contests.Tasks.AdventOfCode2020
                 "striped plum bags contain 2 mirrored lime bags, 2 dark salmon bags.",
                 "plaid gold bags contain 4 dark lime bags, 3 drab aqua bags, 3 dim white bags, 2 mirrored brown bags."
             };
-            
+
             Task7.ParseRules(rules);
             Task7.GetPossibleContainersCountForColor("shiny gold").Should().Be(161);
+            Task7.GetMinimalContainerCountForColor("shiny gold").Should().Be(12);
         }
     }
 }
