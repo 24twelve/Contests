@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -6,45 +7,45 @@ using NUnit.Framework;
 
 namespace Contests.Tasks.AdventOfCode2020
 {
-    public static class Task7
+    public class Task7
     {
-        //todo: configure codestyle to stop moving properties top
-        //todo: stateless so tests wont break
-        //todo: tuples dont look good
-        //todo: fix lexicon
-        public static IReadOnlyDictionary<string, LuggageRule> GetKnownRules => KnownRules;
-
-        public static int GetMinimalContainerCountForColor(string color)
+        public int GetMinimalContainerCountForColor(string color)
         {
-            if (!KnownRules.ContainsKey(color))
+            if (!knownRules.ContainsKey(color))
+            {
                 return 0;
+            }
+
             var result = 0;
-            var stack = new Stack<(LuggageRule, int)>();
-            stack.Push((KnownRules[color], 1));
+            var stack = new Stack<(ContainerRule, int)>();
+            stack.Push((knownRules[color], 1));
             while (stack.Any())
             {
                 var (item, multiplier) = stack.Pop();
-                var shouldContainRules = item.ShouldContain;
+                var shouldContainRules = item.ShouldContainWithAmount;
                 foreach (var (rule, count) in shouldContainRules)
                 {
-                    stack.Push((rule,count*multiplier));
-                    result += count*multiplier;
+                    stack.Push((rule, count * multiplier));
+                    result += count * multiplier;
                 }
             }
 
             return result;
         }
 
-        public static int GetPossibleContainersCountForColor(string color)
+        public int GetPossibleContainersCountForColor(string color)
         {
-            if (!KnownRules.ContainsKey(color))
+            if (!knownRules.ContainsKey(color))
+            {
                 return 0;
-            var rule = KnownRules[color];
-            var stack = new Stack<LuggageRule>(rule.PossibleContainers);
-            var result = new HashSet<LuggageRule>(rule.PossibleContainers);
+            }
+
+            var rule = knownRules[color];
+            var stack = new Stack<ContainerRule>(rule.IsContainedWithin);
+            var result = new HashSet<ContainerRule>(rule.IsContainedWithin);
             while (stack.Any())
             {
-                var possibleContainers = stack.Pop().PossibleContainers;
+                var possibleContainers = stack.Pop().IsContainedWithin;
                 foreach (var possibleContainer in possibleContainers)
                 {
                     result.Add(possibleContainer);
@@ -55,72 +56,74 @@ namespace Contests.Tasks.AdventOfCode2020
             return result.Count;
         }
 
-        public static void ParseRules(string[] rawRules)
+        public void ParseRules(string[] rawRules)
         {
-            foreach (var rawRule in rawRules) ParseRule(rawRule);
+            foreach (var rawRule in rawRules)
+            {
+                ParseRule(rawRule);
+            }
         }
 
-        public static LuggageRule ParseRule(string rawRule)
+        public ContainerRule ParseRule(string rawRule)
         {
-            var split = rawRule.Split("contain");
-            var color = split[0].Split("bags")[0].Trim();
+            //example: "light red bags contain 1 bright white bag, 2 muted yellow bags."
+            var ruleParts = rawRule.Split("contain", StringSplitOptions.RemoveEmptyEntries);
+            var colorParts = ruleParts[0].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var color = colorParts[0] + " " + colorParts[1];
+            var rule = knownRules.GetOrAdd(color, new ContainerRule(color));
 
-            var headRule = KnownRules.GetOrAdd(color, new LuggageRule(color));
-
-            //todo: better string handling
-            //todo: seal somehow to catch rule conflicts
-            if (!split[1].Trim().Contains("no other bags"))
+            //example: "dotted black bags contain no other bags."
+            if (ruleParts[1].Contains("no other bags"))
             {
-                var shouldContain = split[1].Split(',')
-                    .Select(x => x.Trim())
-                    .Select(x => x.Split("bag"))
-                    .Select(x =>
-                    {
-                        var z = x[0].Split(' ');
-                        return (z[1] + " " + z[2], int.Parse(z[0]));
-                    }).ToArray();
-                var childRules = new List<(LuggageRule, int)>();
-                foreach (var (childRuleColor, count) in shouldContain)
-                {
-                    var rule = KnownRules.GetOrAdd(childRuleColor, new LuggageRule(childRuleColor));
-                    rule.PossibleContainers.Add(headRule);
-                    childRules.Add((rule, count));
-                }
-
-                foreach (var (childRule, count) in childRules) headRule.ShouldContain[childRule] = count;
+                return rule;
             }
 
-            return headRule;
+            var childRulesColorsWithAmount = ruleParts[1].Split(',')
+                .Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+                .Select(x => (x[1] + " " + x[2], int.Parse(x[0])))
+                .ToArray();
+            foreach (var (childRuleColor, amount) in childRulesColorsWithAmount)
+            {
+                var childRule = knownRules.GetOrAdd(childRuleColor, new ContainerRule(childRuleColor));
+                rule.ConnectChildRule(childRule, amount);
+            }
+
+            return rule;
         }
 
-        //todo: по-моему тут словарь не нужен + сделать макро на туду и лямбду
 
-        private static readonly ConcurrentDictionary<string, LuggageRule> KnownRules =
-            new ConcurrentDictionary<string, LuggageRule>();
+        private readonly ConcurrentDictionary<string, ContainerRule> knownRules =
+            new ConcurrentDictionary<string, ContainerRule>();
     }
 
-    public class LuggageRule
+    public class ContainerRule
     {
-        public LuggageRule(string color)
+        public ContainerRule(string name)
         {
-            Color = color;
-            ShouldContain = new Dictionary<LuggageRule, int>();
-            PossibleContainers = new List<LuggageRule>();
+            Name = name;
+            ShouldContainWithAmount = new Dictionary<ContainerRule, int>();
+            IsContainedWithin = new List<ContainerRule>();
         }
 
-        public string Color { get; }
-        public Dictionary<LuggageRule, int> ShouldContain { get; }
-        public List<LuggageRule> PossibleContainers { get; }
+        public void ConnectChildRule(ContainerRule childRule, int amount)
+        {
+            childRule.IsContainedWithin.Add(this);
+            ShouldContainWithAmount[childRule] = amount;
+        }
 
         public override bool Equals(object? obj)
         {
-            return obj != null && Color.Equals(((LuggageRule) obj).Color);
+            return obj != null && Name.Equals(((ContainerRule) obj).Name);
         }
 
         public override int GetHashCode()
         {
-            return Color.GetHashCode();
+            return Name.GetHashCode();
         }
+
+        private string Name { get; }
+        public Dictionary<ContainerRule, int> ShouldContainWithAmount { get; }
+        public List<ContainerRule> IsContainedWithin { get; }
     }
 
     public class Task7Tests
@@ -140,9 +143,10 @@ namespace Contests.Tasks.AdventOfCode2020
                 "faded blue bags contain no other bags.",
                 "dotted black bags contain no other bags."
             };
-            Task7.ParseRules(input);
-            Task7.GetPossibleContainersCountForColor("shiny gold").Should().Be(4);
-            Task7.GetMinimalContainerCountForColor("shiny gold").Should().Be(32);
+            var sut = new Task7();
+            sut.ParseRules(input);
+            sut.GetPossibleContainersCountForColor("shiny gold").Should().Be(4);
+            sut.GetMinimalContainerCountForColor("shiny gold").Should().Be(32);
         }
 
 
@@ -150,22 +154,22 @@ namespace Contests.Tasks.AdventOfCode2020
         public void TestParseSingleRule()
         {
             var rule = "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.";
-            var expected = new LuggageRule("vibrant plum");
-            var child1 = new LuggageRule("faded blue");
-            var child2 = new LuggageRule("dotted black");
-            expected.ShouldContain[child1] = 5;
-            expected.ShouldContain[child2] = 6;
+            var expected = new ContainerRule("vibrant plum");
+            var child1 = new ContainerRule("faded blue");
+            var child2 = new ContainerRule("dotted black");
+            expected.ShouldContainWithAmount[child1] = 5;
+            expected.ShouldContainWithAmount[child2] = 6;
 
-            Task7.ParseRule(rule).Should().BeEquivalentTo(expected);
+            new Task7().ParseRule(rule).Should().BeEquivalentTo(expected);
         }
 
         [Test]
         public void TestParseLeafRule()
         {
             var rule = "faded blue bags contain no other bags.";
-            var expected = new LuggageRule("faded blue");
+            var expected = new ContainerRule("faded blue");
 
-            Task7.ParseRule(rule).Should().BeEquivalentTo(expected);
+            new Task7().ParseRule(rule).Should().BeEquivalentTo(expected);
         }
 
         [Test]
@@ -742,9 +746,10 @@ namespace Contests.Tasks.AdventOfCode2020
                 "plaid gold bags contain 4 dark lime bags, 3 drab aqua bags, 3 dim white bags, 2 mirrored brown bags."
             };
 
-            Task7.ParseRules(rules);
-            Task7.GetPossibleContainersCountForColor("shiny gold").Should().Be(161);
-            Task7.GetMinimalContainerCountForColor("shiny gold").Should().Be(12);
+            var sut = new Task7();
+            sut.ParseRules(rules);
+            sut.GetPossibleContainersCountForColor("shiny gold").Should().Be(161);
+            sut.GetMinimalContainerCountForColor("shiny gold").Should().Be(30899);
         }
     }
 }
