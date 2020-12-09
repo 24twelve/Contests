@@ -19,9 +19,14 @@ namespace Contests.Tasks.LeetCode
                 var currentNode = queue.Dequeue();
 
                 if (currentNode.left != null)
+                {
                     buffer.Add(currentNode.left);
+                }
+
                 if (currentNode.right != null)
+                {
                     buffer.Add(currentNode.right);
+                }
 
                 if (queue.Any())
                 {
@@ -30,7 +35,10 @@ namespace Contests.Tasks.LeetCode
                 else
                 {
                     foreach (var bufferNode in buffer)
+                    {
                         queue.Enqueue(bufferNode);
+                    }
+
                     buffer.Clear();
                 }
             }

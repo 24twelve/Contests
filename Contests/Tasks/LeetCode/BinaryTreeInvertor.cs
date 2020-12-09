@@ -10,7 +10,10 @@ namespace Contests.Tasks.LeetCode
         public static TreeNode? InvertTree(TreeNode? root)
         {
             if (root == null)
+            {
                 return null;
+            }
+
             InvertTree(root.right);
             InvertTree(root.left);
             var temp = root.right;

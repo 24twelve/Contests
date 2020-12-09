@@ -18,9 +18,13 @@ namespace Contests.Tasks.LeetCode
 
                 var distance = timeSeries[i + 1] - timeSeries[i];
                 if (distance > duration)
+                {
                     result += duration;
+                }
                 else
+                {
                     result += distance;
+                }
             }
 
             return result;

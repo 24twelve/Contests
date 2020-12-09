@@ -12,7 +12,10 @@ namespace Contests.Common
         public static bool IsTriplet(this TreeNode node)
         {
             if (node.left == null || node.right == null)
+            {
                 return false;
+            }
+
             return node.left.IsLeaf() && node.right.IsLeaf();
         }
 
@@ -33,9 +36,15 @@ namespace Contests.Common
             var result = new TreeNode(root.val);
             result.next = root.next;
             if (root.left != null)
+            {
                 result.left = Copy(root.left);
+            }
+
             if (root.right != null)
+            {
                 result.right = Copy(root.right);
+            }
+
             return result;
         }
 
@@ -50,7 +59,10 @@ namespace Contests.Common
         private static void PopulateWithFakeNodes(this TreeNode root, int currentHeight)
         {
             if (currentHeight <= 1)
+            {
                 return;
+            }
+
             root.left ??= new TreeNode(-1) {IsFake = true};
             root.right ??= new TreeNode(-1) {IsFake = true};
             PopulateWithFakeNodes(root.left, currentHeight - 1);
@@ -62,9 +74,14 @@ namespace Contests.Common
             currentFloor++;
             maxFloor = Math.Max(currentFloor, maxFloor);
             if (node.left != null)
+            {
                 CalculateHeight(node.left, currentFloor, ref maxFloor);
+            }
+
             if (node.right != null)
+            {
                 CalculateHeight(node.right, currentFloor, ref maxFloor);
+            }
         }
     }
 }

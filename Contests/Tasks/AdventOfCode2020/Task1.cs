@@ -24,7 +24,9 @@ namespace Contests.Tasks.AdventOfCode2020
                 var expectedRemainder = 2020 - value;
                 var remainingIndices = TryFindPairIndices(sorted, expectedRemainder);
                 if (remainingIndices != null)
+                {
                     return value * sorted[remainingIndices.Value.First] * sorted[remainingIndices.Value.Second];
+                }
             }
 
             return null;
@@ -38,7 +40,9 @@ namespace Contests.Tasks.AdventOfCode2020
                 var pairValue = expectedSum - value;
                 var pairIndex = Array.BinarySearch(sortedInput, i, sortedInput.Length - i, pairValue);
                 if (pairIndex >= 0)
+                {
                     return (i, pairIndex);
+                }
             }
 
             return null;
@@ -149,8 +153,8 @@ namespace Contests.Tasks.AdventOfCode2020
                 1645, 502, 1717, 1723, 1244, 1370, 1898, 1755, 1708, 1983, 1901, 844, 1239, 1290, 1879, 1656, 1966,
                 1929, 1993, 1743, 1909, 1451, 2000, 1978, 1938, 1707, 1337, 1362, 1263
             };
-            Task1.TryFindPairAnswer(input).Should().Be(538464);
-            Task1.TryFindTripleAnswer(input).Should().Be(278783190);
+            Console.WriteLine(Task1.TryFindPairAnswer(input).Should());
+            Console.WriteLine(Task1.TryFindTripleAnswer(input).Should());
         }
     }
 }

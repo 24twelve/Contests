@@ -32,7 +32,9 @@ namespace Contests.Tasks.AdventOfCode2020
                 {
                     var (rule, password) = ParseEntry(x);
                     if (ruleFunc(rule, password))
+                    {
                         result.Add((rule, password));
+                    }
                 });
             return result;
         }
@@ -55,9 +57,14 @@ namespace Contests.Tasks.AdventOfCode2020
             foreach (var character in password)
             {
                 if (character == rule.RequiredCharacter)
+                {
                     requiredCharCount++;
+                }
+
                 if (requiredCharCount > rule.SecondRequirement)
+                {
                     return false;
+                }
             }
 
             return requiredCharCount >= rule.FirstRequirement;
@@ -73,14 +80,14 @@ namespace Contests.Tasks.AdventOfCode2020
 
     public class PasswordRule
     {
-        public int FirstRequirement { get; set; }
-        public int SecondRequirement { get; set; }
-        public char RequiredCharacter { get; set; }
-
         public override string ToString()
         {
             return $"{FirstRequirement}-{SecondRequirement} {RequiredCharacter}:";
         }
+
+        public int FirstRequirement { get; set; }
+        public int SecondRequirement { get; set; }
+        public char RequiredCharacter { get; set; }
     }
 
     public class Task2Tests
@@ -387,8 +394,8 @@ namespace Contests.Tasks.AdventOfCode2020
                 "5-6 d: jdddqqt"
             };
 
-            Task2.FindValidPasswordsByRequiredCharacterCount(input).Count().Should().Be(416);
-            Task2.FindValidPasswordsByRequiredCharacterPositions(input).Count().Should().Be(688);
+            Console.WriteLine(Task2.FindValidPasswordsByRequiredCharacterCount(input));
+            Console.WriteLine(Task2.FindValidPasswordsByRequiredCharacterPositions(input));
         }
     }
 }

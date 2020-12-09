@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Contests.Common;
@@ -26,19 +27,31 @@ namespace Contests.Tasks.AdventOfCode2020
                 .ToArray();
 
             if (tags.Length < RequiredPassportTags.Length)
+            {
                 return false;
+            }
 
             var tagsLeft = new List<string>(RequiredPassportTags);
             foreach (var (tagName, value) in tags)
             {
                 if (tagsLeft.Count == 0)
+                {
                     return true;
+                }
+
                 if (!tagsLeft.Contains(tagName))
+                {
                     continue;
+                }
+
                 if (IsValidTag(tagName, value))
+                {
                     tagsLeft.Remove(tagName);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             return !tagsLeft.Any();
@@ -50,33 +63,54 @@ namespace Contests.Tasks.AdventOfCode2020
             {
                 case "byr":
                     if (!int.TryParse(value, out var byr) || byr < 1920 || byr > 2002)
+                    {
                         return false;
+                    }
+
                     break;
                 case "iyr":
                     if (!int.TryParse(value, out var iyr) || iyr < 2010 || iyr > 2020)
+                    {
                         return false;
+                    }
+
                     break;
                 case "eyr":
                     if (!int.TryParse(value, out var eyr) || eyr < 2020 || eyr > 2030)
+                    {
                         return false;
+                    }
+
                     break;
                 case "hgt":
                 {
                     if (value == null)
+                    {
                         return false;
+                    }
+
                     var measurement = value.Substring(startIndex: 0, value.Length - 2);
                     if (!int.TryParse(measurement, out var measurementValue))
+                    {
                         return false;
+                    }
+
                     var unit = value.Substring(startIndex: value.Length - 2, length: 2);
                     switch (unit)
                     {
                         case "cm":
                             if (measurementValue < 150 || measurementValue > 193)
+                            {
                                 return false;
+                            }
+
                             break;
                         case "in":
                             if (measurementValue < 59 || measurementValue > 76)
+                            {
                                 return false;
+                            }
+
                             break;
                         default:
                             return false;
@@ -86,15 +120,24 @@ namespace Contests.Tasks.AdventOfCode2020
                 }
                 case "hcl":
                     if (value == null || !HclRegex.IsMatch(value))
+                    {
                         return false;
+                    }
+
                     break;
                 case "ecl":
                     if (!ValidEyeColors.Contains(value))
+                    {
                         return false;
+                    }
+
                     break;
                 case "pid":
                     if (value == null || value.Length != 9 || !long.TryParse(value, out var _))
+                    {
                         return false;
+                    }
+
                     break;
             }
 
@@ -1209,7 +1252,7 @@ hgt:173cm byr:1925 pid:070222017 iyr:2013 hcl:#ceb3a1 ecl:gry eyr:2024
 
             #endregion
 
-            Task4.CountValidPassports(input).Should().Be(175);
+            Console.WriteLine(Task4.CountValidPassports(input));
         }
     }
 }

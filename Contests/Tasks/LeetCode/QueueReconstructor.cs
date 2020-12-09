@@ -14,7 +14,9 @@ namespace Contests.Tasks.LeetCode
 
             var list = new List<int[]>();
             foreach (var item in people)
+            {
                 list.Insert(item[1], item);
+            }
 
             return list.ToArray();
         }
@@ -26,15 +28,23 @@ namespace Contests.Tasks.LeetCode
                 if (x == null)
                 {
                     if (y == null)
+                    {
                         return 1;
+                    }
+
                     return -1;
                 }
 
                 if (y == null)
+                {
                     return -1;
+                }
 
                 if (x[0] != y[0])
+                {
                     return y[0] - x[0];
+                }
+
                 return x[1] - y[1];
             }
         }

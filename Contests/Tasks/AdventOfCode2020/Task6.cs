@@ -18,8 +18,12 @@ namespace Contests.Tasks.AdventOfCode2020
             var count = 0;
             var strings = input.Split("\r\n");
             foreach (var letter in strings.OrderBy(x => x.Length).First())
+            {
                 if (strings.All(x => x.Contains(letter)))
+                {
                     count++;
+                }
+            }
 
             return count;
         }
@@ -2218,10 +2222,8 @@ wdfkpmalijbncuvr
 qhnmikpzaygxwsovej
 
 ";
-            var disctinctLetters = input.Split("\r\n\r\n").Select(Task6.CountDistinctLetters).Sum();
-            Console.WriteLine(disctinctLetters);
-            var commonLetters = input.Split("\r\n\r\n").Select(Task6.CountCommonLetters).Sum();
-            Console.WriteLine(commonLetters);
+            Console.WriteLine(input.Split("\r\n\r\n").Select(Task6.CountDistinctLetters).Sum());
+            Console.WriteLine(input.Split("\r\n\r\n").Select(Task6.CountCommonLetters).Sum());
         }
     }
 }

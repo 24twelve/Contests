@@ -748,8 +748,8 @@ namespace Contests.Tasks.AdventOfCode2020
 
             var sut = new Task7();
             sut.ParseRules(rules);
-            sut.GetPossibleContainersCountForColor("shiny gold").Should().Be(161);
-            sut.GetMinimalContainerCountForColor("shiny gold").Should().Be(30899);
+            Console.WriteLine(sut.GetPossibleContainersCountForColor("shiny gold"));
+            Console.WriteLine(sut.GetMinimalContainerCountForColor("shiny gold"));
         }
     }
 }

@@ -27,9 +27,14 @@ namespace Contests.Tasks.LeetCode
             }
 
             if (root.left != null)
+            {
                 FindLongestPath(root.left, currentPathLength, ref currentMaxPathLength, ref currentFurthestLeaf);
+            }
+
             if (root.right != null)
+            {
                 FindLongestPath(root.right, currentPathLength, ref currentMaxPathLength, ref currentFurthestLeaf);
+            }
         }
     }
 

@@ -12,11 +12,14 @@ namespace Contests.Tasks.AdventOfCode2020
             var orderedIds = occupiedSeats.Select(x => x.Id)
                 .OrderBy(x => x)
                 .ToArray();
-            for (var i = 0; i < orderedIds.Length-1; i++)
+            for (var i = 0; i < orderedIds.Length - 1; i++)
             {
-                if ((orderedIds[i + 1] - orderedIds[i]) > 1)
+                if (orderedIds[i + 1] - orderedIds[i] > 1)
+                {
                     return orderedIds[i] + 1;
+                }
             }
+
             return null;
         }
 
@@ -225,8 +228,8 @@ namespace Contests.Tasks.AdventOfCode2020
                 "BFFFBFBRLL", "FFFBBFFRLR"
             };
             var seats = input.Select(Task5.ParseSeatPosition).ToArray();
-            seats.OrderByDescending(x => x.Id).First().Id.Should().Be(980);
-            Task5.FindOnlyEmptySeat(seats)!.Should().Be(607);
+            Console.WriteLine(seats.OrderByDescending(x => x.Id).First().Id);
+            Console.WriteLine(Task5.FindOnlyEmptySeat(seats));
         }
     }
 }

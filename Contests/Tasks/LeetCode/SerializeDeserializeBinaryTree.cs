@@ -12,7 +12,10 @@ namespace Contests.Tasks.LeetCode
         public static string Serialize(TreeNode? root)
         {
             if (root == null)
+            {
                 return "[]";
+            }
+
             var result = new List<string?> {root.val.ToString()};
 
             var queue = new Queue<TreeNode>();
@@ -48,7 +51,10 @@ namespace Contests.Tasks.LeetCode
         public static TreeNode? Deserialize(string str)
         {
             if (str == "[]" || str == "[null]")
+            {
                 return null;
+            }
+
             str = str.Trim('[', ']');
             var totalNodes = str.Split(',')
                 .Select(x => int.TryParse(x, out var value) ? new TreeNode(value) : null)
@@ -197,7 +203,10 @@ namespace Contests.Tasks.LeetCode
         private void GrowRightRecursively(TreeNode root, int growCount, int maxGrowCount)
         {
             if (growCount >= maxGrowCount)
+            {
                 return;
+            }
+
             growCount++;
             root.right = new TreeNode(growCount);
             GrowRightRecursively(root.right, growCount, maxGrowCount);

@@ -12,7 +12,9 @@ namespace Contests.Tasks.LeetCode
         public static int Find(TreeNode? root)
         {
             if (root == null)
+            {
                 return 0;
+            }
 
             var paths = new List<int>();
             var stack = new Stack<TreeNode>();
@@ -22,9 +24,14 @@ namespace Contests.Tasks.LeetCode
                 var node = stack.Pop();
                 paths.Add(FindLongestJointPath(node));
                 if (node.right != null)
+                {
                     stack.Push(node.right);
+                }
+
                 if (node.left != null)
+                {
                     stack.Push(node.left);
+                }
             }
 
             return paths.Max();

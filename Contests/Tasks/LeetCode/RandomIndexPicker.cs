@@ -30,8 +30,12 @@ namespace Contests.Tasks.LeetCode
         {
             var randomValue = random.NextDouble();
             foreach (var (index, weigh) in normalizedWeighs)
+            {
                 if (randomValue <= weigh)
+                {
                     return index;
+                }
+            }
 
             return normalizedWeighs.Last().Index;
         }
@@ -53,7 +57,9 @@ namespace Contests.Tasks.LeetCode
             var numberOfSamples = 10_00000;
             var deviation = (int) Math.Sqrt(numberOfSamples) * 2;
             for (var _ = 0; _ < numberOfSamples; _++)
+            {
                 result.Add(indexPicker.PickIndex());
+            }
 
             var part = numberOfSamples / 5;
             using (var _ = new AssertionScope())

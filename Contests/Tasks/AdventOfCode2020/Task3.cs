@@ -42,7 +42,7 @@ namespace Contests.Tasks.AdventOfCode2020
             x *= Assert(GetExamplePattern(), dx: 5, dy: 1, expectedTreeCount: 3);
             x *= Assert(GetExamplePattern(), dx: 7, dy: 1, expectedTreeCount: 4);
             x *= Assert(GetExamplePattern(), dx: 1, dy: 2, expectedTreeCount: 2);
-            x.Should().Be(336);
+            Console.WriteLine(x);
         }
 
         [Test]
@@ -82,7 +82,10 @@ namespace Contests.Tasks.AdventOfCode2020
 
             Console.WriteLine($"Maze for dx={dx} dy={dy}");
             foreach (var str in maze)
+            {
                 Console.WriteLine(str);
+            }
+
             countTrees.Should().Be(expectedTreeCount, $"dx={dx} dy={dy}");
             return countTrees;
         }
