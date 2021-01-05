@@ -15,6 +15,12 @@ namespace Contests.Tasks.AdventOfCode2020
             foreach (var number in input)
             {
                 queue.Enqueue(number);
+
+                if (queue.Count < 2)
+                {
+                    continue;
+                }
+
                 var currentSum = queue.Sum();
                 while (currentSum > requiredSum)
                 {
@@ -34,32 +40,29 @@ namespace Contests.Tasks.AdventOfCode2020
         public static long FindFirstBadNumber(long[] input, int preambleLength)
         {
             //todo: some better solution without sum recalculating and probably without list
-            //todo: ints and longs dont work with take
-            var preamble = new List<long>(input.Take(preambleLength));
-            var allSums = new HashSet<long>();
-            foreach (var number in input.Skip(preambleLength))
+            var preamble = new List<long>();
+            var allSums = new List<long>();
+            foreach (var number in input)
             {
-                allSums.Clear();
-                for (var i = 0; i < preamble.Count; i++)
+                if (preamble.Count < preambleLength)
                 {
-                    for (var j = 0; j < preamble.Count; j++)
+                    allSums.AddRange(preamble.Select(t => t + number).ToArray());
+                    preamble.Add(number);
+                }
+                else
+                {
+                    if (!allSums.Contains(number))
                     {
-                        if (i == j)
-                        {
-                            continue;
-                        }
-
-                        allSums.Add(preamble[i] + preamble[j]);
+                        return number;
                     }
-                }
 
-                if (!allSums.Contains(number))
-                {
-                    return number;
-                }
+                    allSums = allSums.Skip(preambleLength - 1).ToList();
+                    allSums.AddRange(preamble.Select(t => t + number).ToArray());
 
-                preamble.RemoveAt(0);
-                preamble.Add(number);
+
+                    preamble.RemoveAt(0);
+                    preamble.Add(number);
+                }
             }
 
 
@@ -82,6 +85,22 @@ namespace Contests.Tasks.AdventOfCode2020
             firstBadNumber.Should().Be(127);
             var badSequence = Task9.FindFirstBadSequence(input, firstBadNumber);
             badSequence.Should().BeEquivalentTo(new long[] {15, 25, 47, 40});
+        }
+
+        [Test]
+        public void TestSimple()
+        {
+            var input = new long[]
+            {
+                1,
+                10,
+                100,
+                101,
+                110,
+                200
+            };
+            var firstBadNumber = Task9.FindFirstBadNumber(input, preambleLength: 3);
+            firstBadNumber.Should().Be(200);
         }
 
         [Test]
